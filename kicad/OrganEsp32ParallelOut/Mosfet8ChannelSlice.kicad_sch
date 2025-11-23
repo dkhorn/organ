@@ -1,0 +1,1281 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "7d09ee16-0120-4fd2-8096-6eec36f3e9d4")
+	(paper "A4")
+	(lib_symbols
+		(symbol "Device:Fuse"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "F"
+				(at 2.032 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Fuse"
+				(at -1.905 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at -1.778 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Fuse"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "fuse"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "*Fuse*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Fuse_0_1"
+				(rectangle
+					(start -0.762 -2.54)
+					(end 0.762 2.54)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0 -2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "Fuse_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	)
+	(junction
+		(at 86.36 132.08)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "45c35935-a1e5-4423-bdcc-e39457ad9b0f")
+	)
+	(junction
+		(at 86.36 60.96)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "48143828-cbd1-4ab6-9ef1-974440742f01")
+	)
+	(junction
+		(at 86.36 93.98)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4c7d6808-e0ed-4165-91a5-02d6490faef9")
+	)
+	(junction
+		(at 86.36 77.47)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5cab04dc-ed24-48f6-a2ec-ff50bcdd5cd4")
+	)
+	(junction
+		(at 86.36 114.3)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8add2a8b-89dc-4c93-a5e3-7ee8847c9060")
+	)
+	(junction
+		(at 86.36 43.18)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a99ad448-a032-45cd-99a1-7c9dab89b52b")
+	)
+	(wire
+		(pts
+			(xy 135.89 40.64) (xy 143.51 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0377bb14-8c14-4147-8688-78a411518a3c")
+	)
+	(wire
+		(pts
+			(xy 106.68 55.88) (xy 116.84 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "083d2dae-6f6b-48bf-aacb-e72011e88e1a")
+	)
+	(wire
+		(pts
+			(xy 86.36 132.08) (xy 86.36 153.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "08f96ba3-c6b4-42da-bee1-9021b32cb9a4")
+	)
+	(wire
+		(pts
+			(xy 86.36 132.08) (xy 118.11 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "12bdc428-6ea4-4c1d-ac86-6c79a5f94785")
+	)
+	(wire
+		(pts
+			(xy 106.68 72.39) (xy 116.84 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1a9356e0-f70b-4fe5-a8c0-a38cde630309")
+	)
+	(wire
+		(pts
+			(xy 43.18 184.15) (xy 43.18 191.77)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "26aa7fa0-17f9-4eeb-8f4f-35a853032763")
+	)
+	(wire
+		(pts
+			(xy 86.36 77.47) (xy 116.84 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "28753976-7dbe-4b5c-8e53-f6bbfbfdca0e")
+	)
+	(wire
+		(pts
+			(xy 86.36 114.3) (xy 118.11 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "30b2a4ae-6b56-4b4f-9223-f99951322ec1")
+	)
+	(wire
+		(pts
+			(xy 147.32 111.76) (xy 138.43 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3f205a3d-7b95-41fc-a1b3-b60652fcac16")
+	)
+	(wire
+		(pts
+			(xy 86.36 93.98) (xy 86.36 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "655bff5b-b378-42a5-8963-1ff7234f71af")
+	)
+	(wire
+		(pts
+			(xy 106.68 38.1) (xy 115.57 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8059d46d-c03d-41ee-9c34-f588da4cf1fa")
+	)
+	(wire
+		(pts
+			(xy 43.18 153.67) (xy 43.18 176.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "819cda58-c808-4503-a482-61a1497bf604")
+	)
+	(wire
+		(pts
+			(xy 106.68 109.22) (xy 118.11 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "85c643a7-d48a-4406-bffc-48a08fe0e8db")
+	)
+	(wire
+		(pts
+			(xy 107.95 21.59) (xy 115.57 21.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9d1ab8df-c613-403c-afe0-647c4f08ae84")
+	)
+	(wire
+		(pts
+			(xy 106.68 88.9) (xy 116.84 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "af36a306-ceed-46d9-8103-6435d7e3306e")
+	)
+	(wire
+		(pts
+			(xy 115.57 26.67) (xy 86.36 26.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b04ae753-8aa0-4190-93e9-625b156376d5")
+	)
+	(wire
+		(pts
+			(xy 86.36 93.98) (xy 116.84 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b54d732e-8425-43d0-9db6-f61f33d2d49f")
+	)
+	(wire
+		(pts
+			(xy 143.51 24.13) (xy 135.89 24.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b55f6538-21cd-46e3-b0ae-ecc5703d1470")
+	)
+	(wire
+		(pts
+			(xy 86.36 60.96) (xy 86.36 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b626fc95-a7ca-462c-a4a0-d9122d564d75")
+	)
+	(wire
+		(pts
+			(xy 147.32 74.93) (xy 137.16 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b6f4b1c1-60b8-4806-80b9-c072930d6c73")
+	)
+	(wire
+		(pts
+			(xy 105.41 127) (xy 118.11 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ccf865cd-2d02-4489-9037-639c55c71534")
+	)
+	(wire
+		(pts
+			(xy 86.36 60.96) (xy 116.84 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cdbd58dc-dbcf-4adc-ac1d-5b9c8aa133ca")
+	)
+	(wire
+		(pts
+			(xy 43.18 153.67) (xy 86.36 153.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d0818e16-6e07-4da5-9247-d2d840c9c0c4")
+	)
+	(wire
+		(pts
+			(xy 86.36 43.18) (xy 86.36 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d387fbab-b13b-4191-b44d-cf439307dbf2")
+	)
+	(wire
+		(pts
+			(xy 86.36 26.67) (xy 86.36 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dd013be6-e437-4597-9cea-3d9a86f58808")
+	)
+	(wire
+		(pts
+			(xy 146.05 129.54) (xy 138.43 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e2c04be1-cf16-4055-926e-fc3a18342a16")
+	)
+	(wire
+		(pts
+			(xy 143.51 58.42) (xy 137.16 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e80bb033-4333-4d07-b631-0ab96f1a8881")
+	)
+	(wire
+		(pts
+			(xy 86.36 114.3) (xy 86.36 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ebd69894-85b1-4c21-b773-8cf2a64c5899")
+	)
+	(wire
+		(pts
+			(xy 86.36 77.47) (xy 86.36 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "eebfae0a-1704-4c1d-8c56-ab900189b786")
+	)
+	(wire
+		(pts
+			(xy 86.36 43.18) (xy 115.57 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f63133e0-d91d-4e08-8ca9-97f16f235038")
+	)
+	(wire
+		(pts
+			(xy 144.78 91.44) (xy 137.16 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ffd39b32-8ff4-4855-9ce4-14a52b12635a")
+	)
+	(hierarchical_label "in1"
+		(shape input)
+		(at 107.95 21.59 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "0c51880d-3684-4718-a452-07910ef13985")
+	)
+	(hierarchical_label "in6"
+		(shape input)
+		(at 106.68 109.22 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "0e85b997-3dbf-4e19-9c38-95a3f5d5a582")
+	)
+	(hierarchical_label "out6"
+		(shape output)
+		(at 147.32 111.76 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "1732951f-06b5-4dc8-bf28-abcb68d987b2")
+	)
+	(hierarchical_label "out4"
+		(shape output)
+		(at 147.32 74.93 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "265f4545-8fbf-4547-9dd2-094ac2769a95")
+	)
+	(hierarchical_label "out2"
+		(shape output)
+		(at 143.51 40.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "303ef7f7-fe4a-40b0-85aa-0817d7ae66e0")
+	)
+	(hierarchical_label "out1"
+		(shape output)
+		(at 143.51 24.13 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "4a023f97-ccda-4f05-a2d5-88493e099eb0")
+	)
+	(hierarchical_label "in7"
+		(shape input)
+		(at 105.41 127 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "525cafca-2de5-4711-b7a9-1474d5a2b72e")
+	)
+	(hierarchical_label "out5"
+		(shape output)
+		(at 144.78 91.44 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "5bd71697-afd6-480b-b2ea-25ba4cd4afb5")
+	)
+	(hierarchical_label "in2"
+		(shape input)
+		(at 106.68 38.1 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "658cdae3-4880-4793-b23a-4051932033ee")
+	)
+	(hierarchical_label "out7"
+		(shape output)
+		(at 146.05 129.54 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "76974b70-2d87-4315-99f5-2687396dc835")
+	)
+	(hierarchical_label "out3"
+		(shape output)
+		(at 143.51 58.42 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "89692da3-1a16-42c2-bac9-4f252a0d0620")
+	)
+	(hierarchical_label "s_gnd"
+		(shape bidirectional)
+		(at 43.18 191.77 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c31de00a-e0af-40b9-8340-fdc271a6e783")
+	)
+	(hierarchical_label "in5"
+		(shape input)
+		(at 106.68 88.9 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c83f6024-9f87-412d-b34d-6b0551e212fa")
+	)
+	(hierarchical_label "in4"
+		(shape input)
+		(at 106.68 72.39 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c84e776b-8b54-4d0c-bf75-e052ca55bd75")
+	)
+	(hierarchical_label "in3"
+		(shape input)
+		(at 106.68 55.88 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "ebc2fecc-7ca6-438c-8db6-2f5935224391")
+	)
+	(symbol
+		(lib_id "Device:Fuse")
+		(at 43.18 180.34 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6b66efbc-7032-466c-bb4e-8cf3f5650d7d")
+		(property "Reference" "F1"
+			(at 40.64 179.0699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "ATO/ATC 3-5A"
+			(at 40.64 181.6099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Fuse:Fuseholder_Blade_Mini_Keystone_3568"
+			(at 44.958 180.34 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 43.18 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Fuse"
+			(at 43.18 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "703430be-3711-4c58-8720-7975c7931331")
+		)
+		(pin "2"
+			(uuid "0abeeaff-c772-47b4-adbe-70ec5cb3cb6c")
+		)
+		(instances
+			(project "OrganMosfetArrayChimes"
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/31f75950-795d-40dc-bc33-6631f724321e"
+					(reference "F2")
+					(unit 1)
+				)
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/e22a4441-0d33-4f2f-83cb-9fe00a47eee4"
+					(reference "F3")
+					(unit 1)
+				)
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/f64a8887-2d1c-460e-83fc-b11b584f1002"
+					(reference "F1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(sheet
+		(at 116.84 69.85)
+		(size 20.32 11.43)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "2757642a-9874-44c7-8a91-6dd5f3cebc45")
+		(property "Sheetname" "MosfetChannel3"
+			(at 116.84 69.1384 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "MosfetChannel.kicad_sch"
+			(at 116.84 81.8646 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "coil-" input
+			(at 137.16 74.93 0)
+			(uuid "37318281-51b0-4944-b1c4-86c3dec38641")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "m_gnd" input
+			(at 116.84 77.47 180)
+			(uuid "51050909-bc3a-4bbe-96c2-0e560c024042")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "signal_in" input
+			(at 116.84 72.39 180)
+			(uuid "453166c0-842e-4c87-9996-2ac745a311af")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "OrganMosfetArrayChimes"
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/f64a8887-2d1c-460e-83fc-b11b584f1002"
+					(page "6")
+				)
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/31f75950-795d-40dc-bc33-6631f724321e"
+					(page "11")
+				)
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/e22a4441-0d33-4f2f-83cb-9fe00a47eee4"
+					(page "19")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 118.11 124.46)
+		(size 20.32 11.43)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "2df45482-3a6a-4105-a4e0-7cfb289f4e5e")
+		(property "Sheetname" "MosfetChannel6"
+			(at 118.11 123.7484 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "MosfetChannel.kicad_sch"
+			(at 118.11 136.4746 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "coil-" input
+			(at 138.43 129.54 0)
+			(uuid "668b4d17-0788-4878-8196-4fd70e79a4dc")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "m_gnd" input
+			(at 118.11 132.08 180)
+			(uuid "8fdc3884-e03a-416b-be51-1b1017684312")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "signal_in" input
+			(at 118.11 127 180)
+			(uuid "38814575-7c6d-4214-869f-e80ae6fa4528")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "OrganMosfetArrayChimes"
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/f64a8887-2d1c-460e-83fc-b11b584f1002"
+					(page "9")
+				)
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/31f75950-795d-40dc-bc33-6631f724321e"
+					(page "17")
+				)
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/e22a4441-0d33-4f2f-83cb-9fe00a47eee4"
+					(page "25")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 116.84 86.36)
+		(size 20.32 11.43)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "34acf12b-64f9-4830-aa39-17b8417eae0f")
+		(property "Sheetname" "MosfetChannel4"
+			(at 116.84 85.6484 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "MosfetChannel.kicad_sch"
+			(at 116.84 98.3746 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "coil-" input
+			(at 137.16 91.44 0)
+			(uuid "e3b3ee88-af14-47d9-bdc9-c08fcfa2689b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "m_gnd" input
+			(at 116.84 93.98 180)
+			(uuid "7b63a770-defe-4548-884c-9815be3ce05b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "signal_in" input
+			(at 116.84 88.9 180)
+			(uuid "f9a26648-6d70-4e5a-bcca-0ce6e771fe0b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "OrganMosfetArrayChimes"
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/f64a8887-2d1c-460e-83fc-b11b584f1002"
+					(page "7")
+				)
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/31f75950-795d-40dc-bc33-6631f724321e"
+					(page "15")
+				)
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/e22a4441-0d33-4f2f-83cb-9fe00a47eee4"
+					(page "23")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 115.57 35.56)
+		(size 20.32 11.43)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "4108d403-570b-4072-ac08-e659d9ddcc7e")
+		(property "Sheetname" "MosfetChannel1"
+			(at 115.57 34.8484 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "MosfetChannel.kicad_sch"
+			(at 115.57 47.5746 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "coil-" input
+			(at 135.89 40.64 0)
+			(uuid "fedb66b7-dce7-4635-acd9-ffd2889507d9")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "m_gnd" input
+			(at 115.57 43.18 180)
+			(uuid "a62cfac6-6a69-40eb-98a7-252f3ea2b035")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "signal_in" input
+			(at 115.57 38.1 180)
+			(uuid "832cf240-3833-4c57-833b-d40f6b86e774")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "OrganMosfetArrayChimes"
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/f64a8887-2d1c-460e-83fc-b11b584f1002"
+					(page "4")
+				)
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/31f75950-795d-40dc-bc33-6631f724321e"
+					(page "13")
+				)
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/e22a4441-0d33-4f2f-83cb-9fe00a47eee4"
+					(page "21")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 118.11 106.68)
+		(size 20.32 11.43)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "55bec648-47f0-4c25-9685-db7c048028a6")
+		(property "Sheetname" "MosfetChannel5"
+			(at 118.11 105.9684 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "MosfetChannel.kicad_sch"
+			(at 118.11 118.6946 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "coil-" input
+			(at 138.43 111.76 0)
+			(uuid "c0dfd326-88a9-446d-b567-9a5fa00c87d8")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "m_gnd" input
+			(at 118.11 114.3 180)
+			(uuid "29dd1289-4b89-4b59-92fa-eebda4a734b1")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "signal_in" input
+			(at 118.11 109.22 180)
+			(uuid "641b9140-e607-4e2b-97e6-bfc6868a64c1")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "OrganMosfetArrayChimes"
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/f64a8887-2d1c-460e-83fc-b11b584f1002"
+					(page "8")
+				)
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/31f75950-795d-40dc-bc33-6631f724321e"
+					(page "16")
+				)
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/e22a4441-0d33-4f2f-83cb-9fe00a47eee4"
+					(page "24")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 115.57 19.05)
+		(size 20.32 11.43)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "71239b42-179d-46b4-a801-a021e56162c0")
+		(property "Sheetname" "MosfetChannel"
+			(at 115.57 18.3384 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "MosfetChannel.kicad_sch"
+			(at 115.57 31.0646 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "coil-" input
+			(at 135.89 24.13 0)
+			(uuid "d6e8896c-18fd-4deb-83a7-27cbd842d764")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "m_gnd" input
+			(at 115.57 26.67 180)
+			(uuid "f4703e69-8e44-4e2b-a935-5ac90e48fa89")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "signal_in" input
+			(at 115.57 21.59 180)
+			(uuid "230d09b2-595e-450d-acc8-d7989b5af333")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "OrganMosfetArrayChimes"
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/f64a8887-2d1c-460e-83fc-b11b584f1002"
+					(page "3")
+				)
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/31f75950-795d-40dc-bc33-6631f724321e"
+					(page "14")
+				)
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/e22a4441-0d33-4f2f-83cb-9fe00a47eee4"
+					(page "22")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 116.84 53.34)
+		(size 20.32 11.43)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "8f80ddd8-ec64-4254-a0be-6525ccba39bb")
+		(property "Sheetname" "MosfetChannel2"
+			(at 116.84 52.6284 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "MosfetChannel.kicad_sch"
+			(at 116.84 65.3546 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "coil-" input
+			(at 137.16 58.42 0)
+			(uuid "6819458f-fe63-4c4c-817c-a6f0035a6a8b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "m_gnd" input
+			(at 116.84 60.96 180)
+			(uuid "0301bc38-e232-4f4b-96ca-b03e008c7353")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "signal_in" input
+			(at 116.84 55.88 180)
+			(uuid "cf9c1366-618d-4596-ac46-3b22bb63c7f3")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "OrganMosfetArrayChimes"
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/f64a8887-2d1c-460e-83fc-b11b584f1002"
+					(page "5")
+				)
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/31f75950-795d-40dc-bc33-6631f724321e"
+					(page "12")
+				)
+				(path "/c071c3dc-fcf2-4a9c-93d2-4680c1b7cb2f/e22a4441-0d33-4f2f-83cb-9fe00a47eee4"
+					(page "20")
+				)
+			)
+		)
+	)
+)
