@@ -8,11 +8,18 @@ extern "C" {
 // Initialize the chimes system
 void chimes_begin(void);
 
-// Cleanup the chimes system
+// Update chimes state machine (call frequently in main loop)
 void chimes_loop(void);
 
-// Play a chime sound
-void ring_chime(int ch);
+// Ring a chime by note number (0-20)
+// Note number is mapped to physical channel via NOTE_TO_CHANNEL array
+void ring_chime(int note);
+
+// Ring a chime by physical channel number (0-20), bypassing note mapping
+void ring_chime_by_channel(int ch);
+
+// Reset all chime plungers to idle state
+void chimes_all_off(void);
 
 #ifdef __cplusplus
 }

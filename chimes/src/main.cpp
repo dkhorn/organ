@@ -3,6 +3,9 @@
 #include <ESPmDNS.h>
 #include <ArduinoOTA.h>
 #include "chimes.h"
+#include "httpserver.h"
+#include "midinote.h"
+#include "midiseq.h"
 
 #ifndef OTA_HOSTNAME
 #define OTA_HOSTNAME "esp32s3"
@@ -110,12 +113,15 @@ void setup() {
   
   if (WiFi.status() == WL_CONNECTED) {
     ota_begin();
+    httpserver_begin();
     Log.printf("IP: %s\n", WiFi.localIP().toString().c_str());
   } else {
     Log.println("IP: Not connected");
   }
   
   chimes_begin();
+  midinote_begin();
+  midiseq_begin();
   Log.printf("Host: %s\n", OTA_HOSTNAME);
   Log.printf("Version: %s\n\n", APP_VERSION);
   Log.println("Setup complete!");
@@ -136,17 +142,25 @@ void loop() {
     
     // Handle OTA
     ArduinoOTA.handle();
+    
+    // Handle HTTP requests
+    httpserver_loop();
   }
 
-  // Ring chimes sequentially every 0.5 seconds
-  static uint32_t chime_timer = 0;
-  static int chime_index = 0;
-  if (millis() - chime_timer > 2000) {
-    chime_timer = millis();
-    ring_chime(chime_index);
-    chime_index = (chime_index + 1) % 20;
-    Log.printf("Rang chime %d\n", chime_index);
-  }
+
+  // // Ring chimes sequentially every 0.5 seconds
+  // static uint32_t chime_timer = 0;
+  // static int chime_index = 0;
+  // if (millis() - chime_timer > 500) {
+  //   chime_timer = millis();
+  //   ring_chime(chime_index);
+  //   chime_index = (chime_index + 1) % 20;
+  //   Log.printf("Rang chime %d\n", chime_index);
+  // }
+  
+  // Update MIDI sequencer
+  midiseq_loop();
+  
   // Your app work here...
   chimes_loop();
 }

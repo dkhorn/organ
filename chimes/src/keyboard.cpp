@@ -1,0 +1,285 @@
+// keyboard.cpp
+#include "keyboard.h"
+
+// HTML for a 20-key keyboard starting at A (MIDI note 69 = A440)
+static const char keyboard_html[] = R"rawliteral(
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #2c2c2c;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    h1 { color: #fff; margin-bottom: 30px; }
+    .keyboard {
+      display: flex;
+      gap: 4px;
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+    .key {
+      width: 50px;
+      height: 200px;
+      background: white;
+      border: 2px solid #333;
+      border-radius: 0 0 5px 5px;
+      cursor: pointer;
+      transition: all 0.1s;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 10px;
+      font-size: 12px;
+      color: #333;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+    }
+    .key:hover {
+      background: #f0f0f0;
+    }
+    .key:active, .key.pressed {
+      background: #4CAF50;
+      color: white;
+      transform: translateY(2px);
+    }
+    .black {
+      background: #222;
+      color: #888;
+      height: 130px;
+      width: 35px;
+      margin: 0 -19px;
+      z-index: 1;
+      border: 2px solid #000;
+    }
+    .black:hover {
+      background: #333;
+    }
+    .black:active, .black.pressed {
+      background: #4CAF50;
+      color: white;
+    }
+    .info {
+      margin-top: 20px;
+      text-align: center;
+      color: #888;
+    }
+    .song-controls {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .song-btn {
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: all 0.2s;
+    }
+    .song-btn:hover {
+      background-color: #0b7dda;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .song-btn:active {
+      transform: translateY(0);
+    }
+    .params-controls {
+      margin-top: 15px;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .param-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .param-group label {
+      font-weight: bold;
+      color: #333;
+    }
+    .param-group input {
+      width: 80px;
+      padding: 6px;
+      font-size: 14px;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>MIDI Keyboard</h1>
+  <div class='keyboard' id='keyboard'></div>
+  
+  <div class='song-controls'>
+    <button class='song-btn' onclick='playSong(0)'>Song 1</button>
+    <button class='song-btn' onclick='playSong(1)'>Song 2</button>
+    <button class='song-btn' onclick='playSong(2)'>Song 3</button>
+  </div>
+  
+  <div class='params-controls'>
+    <div class='param-group'>
+      <label for='transpose'>Transpose:</label>
+      <input type='number' id='transpose' value='0' min='-24' max='24' />
+      <span>semitones</span>
+    </div>
+    <div class='param-group'>
+      <label for='tempo'>Tempo:</label>
+      <input type='number' id='tempo' value='120' min='20' max='300' />
+      <span>BPM</span>
+    </div>
+  </div>
+  
+  <button id='panicBtn' style='margin-top: 30px; padding: 15px 40px; font-size: 18px; background-color: #dc3545; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; box-shadow: 0 3px 10px rgba(0,0,0,0.3);'>
+    PANIC - All Stop
+  </button>
+  <div class='info'>
+    <p>20 keys starting at A440 (MIDI note 69)</p>
+    <p>Click and hold keys to play</p>
+  </div>
+
+  <script>
+    // MIDI note 69 = A440, we have 20 keys
+    const START_NOTE = 69;
+    const NUM_KEYS = 20;
+    
+    // Key pattern: W=white, B=black
+    // Starting from A: A, A#, B, C, C#, D, D#, E, F, F#, G, G#, (next A)
+    const pattern = ['W','B','W','W','B','W','B','W','W','B','W','B'];
+    const noteNames = ['A','A#','B','C','C#','D','D#','E','F','F#','G','G#'];
+    
+    const keyboard = document.getElementById('keyboard');
+    const activeNotes = new Set();
+    
+    // Create keys
+    for (let i = 0; i < NUM_KEYS; i++) {
+      const midiNote = START_NOTE + i;
+      const patternIdx = i % 12;
+      const isBlack = pattern[patternIdx] === 'B';
+      const noteName = noteNames[patternIdx];
+      const octave = Math.floor((START_NOTE + i) / 12) - 1;
+      
+      const key = document.createElement('div');
+      key.className = 'key' + (isBlack ? ' black' : '');
+      key.textContent = noteName;
+      key.dataset.note = midiNote;
+      
+      // Mouse events
+      key.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        noteOn(midiNote, key);
+      });
+      
+      key.addEventListener('mouseup', (e) => {
+        e.preventDefault();
+        noteOff(midiNote, key);
+      });
+      
+      key.addEventListener('mouseleave', (e) => {
+        if (activeNotes.has(midiNote)) {
+          noteOff(midiNote, key);
+        }
+      });
+      
+      // Touch events
+      key.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        noteOn(midiNote, key);
+      });
+      
+      key.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        noteOff(midiNote, key);
+      });
+      
+      keyboard.appendChild(key);
+    }
+    
+    function noteOn(note, element) {
+      if (activeNotes.has(note)) return;
+      activeNotes.add(note);
+      element.classList.add('pressed');
+      
+      fetch('/note_on?note=' + note + '&velocity=100')
+        .catch(e => console.error('Error:', e));
+    }
+    
+    function noteOff(note, element) {
+      if (!activeNotes.has(note)) return;
+      activeNotes.delete(note);
+      element.classList.remove('pressed');
+      
+      fetch('/note_off?note=' + note + '&velocity=64')
+        .catch(e => console.error('Error:', e));
+    }
+    
+    // Global mouse up to catch releases outside keys
+    document.addEventListener('mouseup', () => {
+      activeNotes.forEach(note => {
+        const key = keyboard.querySelector(`[data-note="${note}"]`);
+        if (key) noteOff(note, key);
+      });
+    });
+    
+    // Song playback function
+    function playSong(songId) {
+      const transpose = document.getElementById('transpose').value;
+      const tempo = document.getElementById('tempo').value;
+      let url = '/play/' + songId + '?transpose=' + transpose + '&tempo=' + tempo;
+      
+      fetch(url)
+        .then(r => r.text())
+        .then(data => console.log('Playing song ' + songId + ':', data))
+        .catch(e => console.error('Song error:', e));
+    }
+    
+    // Panic button handler - stops sequencer AND all notes
+    document.getElementById('panicBtn').addEventListener('click', () => {
+      // Stop sequencer first
+      fetch('/seq_stop')
+        .then(() => fetch('/all_off'))
+        .then(r => r.text())
+        .then(data => console.log('Panic:', data))
+        .catch(e => console.error('Panic error:', e));
+      
+      // Clear all visual feedback
+      activeNotes.forEach(note => {
+        const key = keyboard.querySelector(`[data-note="${note}"]`);
+        if (key) key.classList.remove('pressed');
+      });
+      activeNotes.clear();
+    });
+  </script>
+</body>
+</html>
+)rawliteral";
+
+extern "C" {
+
+const char* get_keyboard_html() {
+  return keyboard_html;
+}
+
+} // extern "C"
