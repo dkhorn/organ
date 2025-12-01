@@ -1,7 +1,6 @@
-// midiseq.h - Simple non-blocking MIDI sequencer
-#ifndef COMMON_H
-#define COMMON_H
-
+// constants.h - Project-specific constants
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
 
 #ifndef OTA_HOSTNAME
 #define OTA_HOSTNAME "esp32s3_hwtest"
@@ -13,4 +12,4 @@
 #define APP_VERSION "0.0.0"
 #endif
 
-#endif // COMMON_H
+#endif // CONSTANTS_H

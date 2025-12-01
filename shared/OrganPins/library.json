@@ -1,0 +1,13 @@
+{
+  "name": "OrganPins",
+  "version": "0.1.0",
+  "description": "Pin definitions for Organ hardware projects",
+  "keywords": ["organ", "pins", "hardware"],
+  "authors": [
+    {
+      "name": "dkhorn"
+    }
+  ],
+  "frameworks": "arduino",
+  "platforms": "espressif32"
+}

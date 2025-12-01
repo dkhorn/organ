@@ -1,0 +1,13 @@
+{
+  "name": "OrganCommon",
+  "version": "0.1.0",
+  "description": "Shared common code for Organ PlatformIO projects",
+  "keywords": ["organ", "common", "wifi", "ota"],
+  "authors": [
+    {
+      "name": "dkhorn"
+    }
+  ],
+  "frameworks": "arduino",
+  "platforms": "espressif32"
+}

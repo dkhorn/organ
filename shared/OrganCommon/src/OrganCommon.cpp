@@ -2,13 +2,7 @@
 #include <WiFi.h>
 #include <ESPmDNS.h>
 #include <ArduinoOTA.h>
-#include "httpserver.h"
-#include "pins.h"
-#include "constants.h"
-
-// ---- WiFi creds ----
-static const char* WIFI_SSID = "HAWI";
-static const char* WIFI_PASS = "murphalurf18";
+#include "OrganCommon.h"
 
 // Status LED (GPIO 38 is the RGB LED on ESP32-S3-DevKitC-1)
 #define LED_PIN 38
@@ -19,6 +13,7 @@ WiFiClient telnetClient;
 
 // Custom print that outputs to both Serial and Telnet
 class DualOutput : public Print {
+public:
 public:
   size_t write(uint8_t c) override {
     size_t n = Serial.write(c);
@@ -38,9 +33,9 @@ public:
 
 DualOutput Log;
 
-static void wifi_connect() {
+static void wifi_connect(const char* ssid, const char* password) {
   WiFi.mode(WIFI_STA);
-  WiFi.begin(WIFI_SSID, WIFI_PASS);
+  WiFi.begin(ssid, password);
   Serial.print("Connecting to WiFi");
   uint32_t t0 = millis();
   while (WiFi.status() != WL_CONNECTED) {
@@ -54,9 +49,9 @@ static void wifi_connect() {
   Serial.println(" connected!");
 }
 
-static void ota_begin() {
-  ArduinoOTA.setHostname(OTA_HOSTNAME);
-  ArduinoOTA.setPassword(OTA_PASSWORD);
+static void ota_begin(const char* hostname, const char* password) {
+  ArduinoOTA.setHostname(hostname);
+  ArduinoOTA.setPassword(password);
   ArduinoOTA.onStart([] {
     Log.println("OTA Start");
   });
@@ -78,7 +73,7 @@ static void ota_begin() {
   });
   ArduinoOTA.begin();
 
-  if (!MDNS.begin(OTA_HOSTNAME)) {
+  if (!MDNS.begin(hostname)) {
     Log.println("mDNS failed (OTA still works by IP)");
   } else {
     MDNS.addService("arduino", "tcp", 3232);
@@ -91,32 +86,29 @@ static void ota_begin() {
   Log.println("Telnet server started on port 23");
 }
 
-void common_setup() {
+void organcommon_setup(const char* wifi_ssid, const char* wifi_password, 
+                       const char* ota_hostname, const char* ota_password,
+                       const char* app_version) {
   
   Serial.begin(115200);
   delay(200);
 
-  Log.println("\n\n=== Chime Ctrl ===");
+  Log.printf("\n\n=== %s ===\n", ota_hostname);
   
-  wifi_connect();
+  wifi_connect(wifi_ssid, wifi_password);
   
   if (WiFi.status() == WL_CONNECTED) {
-    ota_begin();
-    httpserver_begin();
+    ota_begin(ota_hostname, ota_password);
     Log.printf("IP: %s\n", WiFi.localIP().toString().c_str());
   } else {
     Log.println("IP: Not connected");
   }
   
-  chimes_begin();
-  midinote_begin();
-  midiseq_begin();
-  Log.printf("Host: %s\n", OTA_HOSTNAME);
-  Log.printf("Version: %s\n\n", APP_VERSION);
-  Log.println("Setup complete!");
+  Log.printf("Host: %s\n", ota_hostname);
+  Log.printf("Version: %s\n\n", app_version);
 }
 
-void common_loop() {
+void organcommon_loop() {
   // Handle telnet connections
   if (WiFi.status() == WL_CONNECTED) {
     // Check for new telnet clients
@@ -125,14 +117,11 @@ void common_loop() {
       if (telnetClient) {
         telnetClient.stop();
       }
-      telnetClient = telnetServer.available();
+      telnetClient = telnetServer.accept();
       Log.println("\nTelnet client connected");
     }
     
     // Handle OTA
     ArduinoOTA.handle();
-    
-    // Handle HTTP requests
-    httpserver_loop();
   }
 }
