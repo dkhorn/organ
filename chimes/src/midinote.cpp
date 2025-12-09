@@ -2,6 +2,7 @@
 #include <Arduino.h>
 #include "midinote.h"
 #include "chimes.h"
+#include "noterepeater.h"
 
 // MIDI note tracking - which notes are currently "on"
 static bool note_state[128] = {false};
@@ -52,7 +53,7 @@ void note_on(uint8_t midi_note, uint8_t velocity) {
     note_state[midi_note] = true;
     
     // Ring the chime
-    ring_chime(chime_note);
+    ring_chime(chime_note, velocity);
     
     Serial.printf("MIDI Note On: %d -> Chime: %d\n", midi_note, chime_note);
   } else {
@@ -81,6 +82,9 @@ void all_off() {
   
   // Reset all chime plungers to idle
   chimes_all_off();
+  
+  // Stop all repeating notes
+  stop_all_repeated_notes();
   
   Serial.println("All notes off");
 }

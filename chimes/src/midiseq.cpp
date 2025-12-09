@@ -12,6 +12,7 @@ static uint32_t next_event_time = 0;
 static bool playing = false;
 static bool paused = false;
 static int8_t transpose = 0;  // Transpose in semitones (half-steps)
+static uint8_t velocity_scale = 127;  // Maximum velocity (127 = no scaling)
 
 // Calculate microseconds per tick based on tempo
 static void calculate_timing(uint16_t tempo_bpm) {
@@ -29,7 +30,7 @@ void midiseq_begin() {
 }
 
 void midiseq_load(const MidiEvent* events, uint16_t count, 
-                  uint16_t tpq, uint16_t tempo_bpm, int8_t transpose_semitones) {
+                  uint16_t tpq, uint16_t tempo_bpm, int8_t transpose_semitones, uint8_t max_velocity) {
   // Stop current playback
   midiseq_stop();
   
@@ -39,6 +40,7 @@ void midiseq_load(const MidiEvent* events, uint16_t count,
   current_event = 0;
   ticks_per_quarter = tpq;
   transpose = transpose_semitones;
+  velocity_scale = max_velocity;
   
   calculate_timing(tempo_bpm);
 }
@@ -104,7 +106,10 @@ void midiseq_loop() {
         if (evt->data2 > 0) {  // Velocity > 0 means note on
           int16_t transposed_note = (int16_t)evt->data1 + transpose;
           if (transposed_note >= 0 && transposed_note <= 127) {
-            note_on(transposed_note, evt->data2);
+            // Scale velocity proportionally: vel_out = (vel_in * max_velocity) / 127
+            uint8_t scaled_velocity = (velocity_scale == 127) ? evt->data2 : 
+                                      ((uint16_t)evt->data2 * velocity_scale) / 127;
+            note_on(transposed_note, scaled_velocity);
           }
           // Serial.printf("Note ON: %d vel=%d\n", evt->data1, evt->data2);
         } else {  // Velocity = 0 is actually note off

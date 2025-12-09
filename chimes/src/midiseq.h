@@ -25,9 +25,10 @@ void midiseq_begin();
 // ticks_per_quarter: MIDI ticks per quarter note (typically 480 or 96)
 // tempo_bpm: playback tempo in beats per minute
 // transpose_semitones: number of half-steps to transpose (default 0)
+// max_velocity: maximum velocity (127 = no scaling, lower values scale proportionally)
 void midiseq_load(const MidiEvent* events, uint16_t num_events, 
                   uint16_t ticks_per_quarter, uint16_t tempo_bpm,
-                  int8_t transpose_semitones = 0);
+                  int8_t transpose_semitones = 0, uint8_t max_velocity = 127);
 
 // Start playback
 void midiseq_play();

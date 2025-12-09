@@ -2,12 +2,11 @@
 #include <Arduino.h>
 #include "driver/mcpwm.h"
 #include "driver/sigmadelta.h"
+#include "logger.h"
 
 // ---------- User-tweakable envelope ----------
 static const uint16_t KICK_DUTY = 100;      // % duty during lift
-static const uint16_t HOLD_DUTY = 20;       // % duty during short hold
 static const uint32_t KICK_MS   = 35;       // ms
-static const uint32_t HOLD_MS   = 90;       // ms
 static const uint32_t PWM_FREQ  = 4000;     // Hz (>=2 kHz to avoid whine)
 static const uint8_t  LEDC_RES_BITS = 12;   // 12-bit resolution
 
@@ -97,13 +96,53 @@ static const int NOTE_TO_CHANNEL[21] = {
   0   // note 20 E  -> channel 0  (GPIO 4)
 };
 
+// ---------- Calibration Data ----------
+// Per-channel calibration: min and max duty percentage for velocity scaling
+struct ChimeCalibration {
+  uint8_t min_duty_pct;  // Minimum duty % (for velocity=1)
+  uint8_t max_duty_pct;  // Maximum duty % (for velocity=127)
+  uint8_t kick_ms_min;   // Kick hold time at max duty (shorter)
+  uint8_t kick_ms_max;   // Kick hold time at min duty (longer)
+};
+
+static ChimeCalibration CALIBRATION[21] = {
+  {50, 100, 35, 110}, // channel 0
+  {50, 100, 35, 110}, // channel 1
+  {54, 100, 35, 105}, // channel 2
+  {58, 100, 35, 112}, // channel 3
+  {51, 100, 35, 139}, // channel 4
+  {56, 100, 35, 95}, // channel 5
+  {58, 100, 35, 110}, // channel 6
+  {56, 100, 35, 135}, // channel 7
+  {53, 100, 35, 135}, // channel 8
+  {60, 100, 35, 94}, // channel 9
+  {59, 100, 35, 131}, // channel 10
+  {50, 100, 35, 135}, // channel 11
+  {60, 100, 35, 89}, // channel 12
+  {65, 100, 35, 80}, // channel 13
+  {58, 100, 35, 84}, // channel 14
+  {63, 100, 35, 72}, // channel 15
+  {53, 100, 35, 120}, // channel 16
+  {51, 100, 35, 102}, // channel 17
+  {66, 100, 35, 100}, // channel 18
+  {46, 100, 35, 133}, // channel 19
+  {46, 100, 35, 133}  // channel 20
+};
+
 // ---------- Simple strike state machine ----------
-enum class StrikeState : uint8_t { IDLE, KICK, HOLD };
+enum class StrikeState : uint8_t { IDLE, KICK };
 struct Strike {
   StrikeState st = StrikeState::IDLE;
   uint32_t t0 = 0; // ms start time
+  uint8_t duty_pct = 100; // Initial duty for this strike
+  uint8_t kick_hold_ms = KICK_MS;  // Kick hold time in ms
 };
 static Strike S[21];
+
+// ---------- Power Budget System ----------
+// At 13V and 8 ohms, each chime draws 1.625A when active
+// Maximum current budget: 10A -> ~6 chimes max (6 * 1.625 = 9.75A)
+static const int MAX_CONCURRENT_CHIMES = 6;
 
 static inline void setDutyPct(int ch, uint16_t dutyPct) {
   if (ch < 0 || ch >= 21) return;
@@ -207,21 +246,98 @@ void chimes_begin() {
   for (int i = 0; i < 21; ++i) setDutyPct(i, 0);
 }
 
-void ring_chime_by_channel(int ch) {
+// Find oldest active chime and kill it
+static void enforce_power_budget(int max_allowed) {
+  int oldest_ch = -1;
+  uint32_t oldest_t0 = UINT32_MAX;
+  int active_count = 0;
+  
+  do {
+    active_count = 0;
+    oldest_ch = -1;
+    oldest_t0 = UINT32_MAX;
+
+    for (int ch = 0; ch < 21; ++ch) {
+      if (S[ch].st == StrikeState::KICK) {
+        active_count++;
+        if (S[ch].t0 < oldest_t0) {
+          oldest_t0 = S[ch].t0;
+          oldest_ch = ch;
+        }
+      }
+    }
+    if (active_count > max_allowed && oldest_ch >= 0) {
+      Log.printf("Power budget: Killing oldest chime %d (active=%d/%d)\n", 
+                oldest_ch, active_count, MAX_CONCURRENT_CHIMES);
+      
+      // Force it to IDLE
+      S[oldest_ch].st = StrikeState::IDLE;
+      setDutyPct(oldest_ch, 0);
+      active_count--;
+    }
+  } while (active_count > max_allowed);
+}
+
+void ring_chime_raw(int ch, int dutyPct, int kickHoldTimeMs) {
   if (ch < 0 || ch >= 21) return;
+  
+  // Check power budget - if at limit and this is a new strike, kill oldest chime
+  if (S[ch].st == StrikeState::IDLE) {
+    // Make room for a new strike by enforcing we have one less than max
+    enforce_power_budget(MAX_CONCURRENT_CHIMES - 1);
+  }
   
   // Start a new strike if idle (or restart current one)
   S[ch].st = StrikeState::KICK;
   S[ch].t0 = millis();
-  setDutyPct(ch, KICK_DUTY);
+  S[ch].duty_pct = dutyPct;
+  S[ch].kick_hold_ms = kickHoldTimeMs;
+
+  Log.printf("%d ring_chime_raw: ch=%d duty=%d hold=%d\n", 
+             S[ch].t0, ch, dutyPct, kickHoldTimeMs);
+  setDutyPct(ch, dutyPct);
 }
 
-void ring_chime(int note) {
+void ring_chime_by_channel(int ch, int velocity) {
+  if (ch < 0 || ch >= 21) return;
+  
+  // Clamp velocity to valid MIDI range
+  if (velocity < 1) velocity = 1;
+  if (velocity > 127) velocity = 127;
+
+  // Scale duty using calibration data
+  // velocity=1 -> min_duty_pct, velocity=127 -> max_duty_pct
+  const ChimeCalibration &cal = CALIBRATION[ch];
+  uint16_t scaled_duty = cal.min_duty_pct + 
+                        ((cal.max_duty_pct - cal.min_duty_pct) * (velocity - 1)) / 126;
+  
+  // Calculate kick time inversely proportional to duty
+  // Higher duty (stronger) = shorter kick time
+  // Lower duty (weaker) = longer kick time
+  // Use reciprocal interpolation: 1/duty varies linearly with kick_ms
+  // At max_duty -> kick_ms_min, at min_duty -> kick_ms_max
+  
+  // Calculate reciprocals (scaled by 10000 to maintain precision)
+  float inv_duty = 10000.0f / scaled_duty;
+  float inv_max_duty = 10000.0f / cal.max_duty_pct;
+  float inv_min_duty = 10000.0f / cal.min_duty_pct;
+  
+  // Linear interpolation in reciprocal space
+  float kick_ms_f = cal.kick_ms_min + 
+                    (cal.kick_ms_max - cal.kick_ms_min) * 
+                    (inv_duty - inv_max_duty) / (inv_min_duty - inv_max_duty);
+  
+  uint16_t kick_ms = (uint16_t)(kick_ms_f + 0.5f); // Round to nearest integer
+  
+  ring_chime_raw(ch, scaled_duty, kick_ms);
+}
+
+void ring_chime(int note, int velocity) {
   if (note < 0 || note >= 21) return;
   
   // Map note number to physical channel
   int ch = NOTE_TO_CHANNEL[note];
-  ring_chime_by_channel(ch);
+  ring_chime_by_channel(ch, velocity);
 }
 
 void chimes_all_off() {
@@ -242,21 +358,11 @@ void chimes_loop() {
         break;
 
       case StrikeState::KICK: {
-        if (now - st.t0 >= KICK_MS) {
-          // move to HOLD/decay
-          st.st = StrikeState::HOLD;
-          st.t0 = now;
-          setDutyPct(ch, HOLD_DUTY);
-          // Serial.printf("Chime %d: HOLD\n", ch);
-        }
-      } break;
-
-      case StrikeState::HOLD: {
-        if (now - st.t0 >= HOLD_MS) {
+        if (now - st.t0 >= st.kick_hold_ms) {
           // release (off)
           setDutyPct(ch, 0);
           st.st = StrikeState::IDLE;
-          // Serial.printf("Chime %d: IDLE\n", ch);
+          Log.printf("%d Chime %d: IDLE\n", now, ch);
         }
       } break;
     }

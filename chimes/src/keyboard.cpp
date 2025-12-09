@@ -134,9 +134,14 @@ static const char keyboard_html[] = R"rawliteral(
   <div class='keyboard' id='keyboard'></div>
   
   <div class='song-controls'>
-    <button class='song-btn' onclick='playSong(0)'>Song 1</button>
-    <button class='song-btn' onclick='playSong(1)'>Song 2</button>
-    <button class='song-btn' onclick='playSong(2)'>Song 3</button>
+    <button class='song-btn' onclick='playSong(0)'>Velocity Test</button>
+    <button class='song-btn' onclick='playSong(1)'>C Major Scale</button>
+    <button class='song-btn' onclick='playSong(2)'>Chromatic</button>
+    <button class='song-btn' onclick='playSong(3)'>Imported Melody</button>
+    <button class='song-btn' onclick='playSong(4)'>Ode to Joy</button>
+    <button class='song-btn' onclick='playSong(5)'>Canon in D</button>
+    <button class='song-btn' onclick='playSong(6)'>Greensleeves</button>
+    <button class='song-btn' onclick='playSong(7)'>Wind Chimes</button>
   </div>
   
   <div class='params-controls'>
@@ -150,6 +155,16 @@ static const char keyboard_html[] = R"rawliteral(
       <input type='number' id='tempo' value='120' min='20' max='300' />
       <span>BPM</span>
     </div>
+    <div class='param-group'>
+      <label for='velocity'>Velocity:</label>
+      <input type='number' id='velocity' value='127' min='1' max='127' />
+      <span>(1-127)</span>
+    </div>
+    <div class='param-group'>
+      <label for='repeatMode'>Repeat Mode:</label>
+      <input type='checkbox' id='repeatMode' style='width: auto; transform: scale(1.5); margin-left: 10px;' />
+      <span style='margin-left: 10px;'>OFF</span>
+    </div>
   </div>
   
   <button id='panicBtn' style='margin-top: 30px; padding: 15px 40px; font-size: 18px; background-color: #dc3545; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; box-shadow: 0 3px 10px rgba(0,0,0,0.3);'>
@@ -157,7 +172,7 @@ static const char keyboard_html[] = R"rawliteral(
   </button>
   <div class='info'>
     <p>20 keys starting at A440 (MIDI note 69)</p>
-    <p>Click and hold keys to play</p>
+    <p>Click and hold keys to play • Repeat Mode: Click=strike, Release=repeat at that tempo</p>
   </div>
 
   <script>
@@ -172,6 +187,16 @@ static const char keyboard_html[] = R"rawliteral(
     
     const keyboard = document.getElementById('keyboard');
     const activeNotes = new Set();
+    const repeatingNotes = new Map(); // Maps note -> {velocity, downTime, ignoreUp}
+    
+    // Update repeat mode label
+    const repeatModeCheckbox = document.getElementById('repeatMode');
+    repeatModeCheckbox.addEventListener('change', (e) => {
+      const label = e.target.parentElement.querySelector('span:last-child');
+      label.textContent = e.target.checked ? 'ON' : 'OFF';
+      label.style.color = e.target.checked ? '#4CAF50' : '';
+      label.style.fontWeight = e.target.checked ? 'bold' : '';
+    });
     
     // Create keys
     for (let i = 0; i < NUM_KEYS; i++) {
@@ -189,16 +214,69 @@ static const char keyboard_html[] = R"rawliteral(
       // Mouse events
       key.addEventListener('mousedown', (e) => {
         e.preventDefault();
-        noteOn(midiNote, key);
+        const velocity = calculateVelocity(e, key);
+        const isRepeatMode = document.getElementById('repeatMode').checked;
+        
+        if (isRepeatMode) {
+          // Check if note is already repeating
+          if (repeatingNotes.has(midiNote)) {
+            // Stop repeating this note
+            fetch('/repeat/stop?note=' + midiNote)
+              .catch(err => console.error('Error:', err));
+            repeatingNotes.delete(midiNote);
+            key.classList.remove('pressed');
+            return; // Ignore mouse-up for this click
+          } else {
+            // Ring once and note the time
+            noteOn(midiNote, key, velocity);
+            noteOff(midiNote, key);
+            repeatingNotes.set(midiNote, {
+              velocity: velocity,
+              downTime: Date.now(),
+              ignoreUp: false
+            });
+          }
+        } else {
+          // Normal mode
+          noteOn(midiNote, key, velocity);
+        }
       });
       
       key.addEventListener('mouseup', (e) => {
         e.preventDefault();
-        noteOff(midiNote, key);
+        const isRepeatMode = document.getElementById('repeatMode').checked;
+        
+        if (isRepeatMode) {
+          // Check if we should start repeating
+          if (repeatingNotes.has(midiNote)) {
+            const info = repeatingNotes.get(midiNote);
+            if (info.ignoreUp) {
+              // This was a stop-repeat click, clear the flag
+              info.ignoreUp = false;
+              return;
+            }
+            
+            // Calculate period from time held
+            const period = Date.now() - info.downTime;
+            if (period >= 100) { // Minimum 100ms period
+              // Start repeating
+              fetch('/repeat/start?note=' + midiNote + '&velocity=' + info.velocity + '&period=' + period + '&count=0')
+                .catch(err => console.error('Error:', err));
+              key.classList.add('pressed'); // Keep it green
+            } else {
+              // Too short, just clear state
+              repeatingNotes.delete(midiNote);
+            }
+          }
+        } else {
+          // Normal mode
+          noteOff(midiNote, key);
+        }
       });
       
       key.addEventListener('mouseleave', (e) => {
-        if (activeNotes.has(midiNote)) {
+        const isRepeatMode = document.getElementById('repeatMode').checked;
+        if (!isRepeatMode && activeNotes.has(midiNote)) {
           noteOff(midiNote, key);
         }
       });
@@ -206,23 +284,99 @@ static const char keyboard_html[] = R"rawliteral(
       // Touch events
       key.addEventListener('touchstart', (e) => {
         e.preventDefault();
-        noteOn(midiNote, key);
+        const touch = e.touches[0];
+        const velocity = calculateVelocityTouch(touch, key);
+        const isRepeatMode = document.getElementById('repeatMode').checked;
+        
+        if (isRepeatMode) {
+          // Check if note is already repeating
+          if (repeatingNotes.has(midiNote)) {
+            // Stop repeating this note
+            fetch('/repeat/stop?note=' + midiNote)
+              .catch(err => console.error('Error:', err));
+            repeatingNotes.delete(midiNote);
+            key.classList.remove('pressed');
+            return; // Ignore touch-end for this touch
+          } else {
+            // Ring once and note the time
+            noteOn(midiNote, key, velocity);
+            noteOff(midiNote, key);
+            repeatingNotes.set(midiNote, {
+              velocity: velocity,
+              downTime: Date.now(),
+              ignoreUp: false
+            });
+          }
+        } else {
+          // Normal mode
+          noteOn(midiNote, key, velocity);
+        }
       });
       
       key.addEventListener('touchend', (e) => {
         e.preventDefault();
-        noteOff(midiNote, key);
+        const isRepeatMode = document.getElementById('repeatMode').checked;
+        
+        if (isRepeatMode) {
+          // Check if we should start repeating
+          if (repeatingNotes.has(midiNote)) {
+            const info = repeatingNotes.get(midiNote);
+            if (info.ignoreUp) {
+              // This was a stop-repeat touch, clear the flag
+              info.ignoreUp = false;
+              return;
+            }
+            
+            // Calculate period from time held
+            const period = Date.now() - info.downTime;
+            if (period >= 100) { // Minimum 100ms period
+              // Start repeating
+              fetch('/repeat/start?note=' + midiNote + '&velocity=' + info.velocity + '&period=' + period + '&count=0')
+                .catch(err => console.error('Error:', err));
+              key.classList.add('pressed'); // Keep it green
+            } else {
+              // Too short, just clear state
+              repeatingNotes.delete(midiNote);
+            }
+          }
+        } else {
+          // Normal mode
+          noteOff(midiNote, key);
+        }
       });
       
       keyboard.appendChild(key);
     }
     
-    function noteOn(note, element) {
+    // Calculate velocity based on mouse click position
+    // Bottom of key = 127, top of key = 10
+    function calculateVelocity(e, element) {
+      const rect = element.getBoundingClientRect();
+      const y = e.clientY - rect.top; // Click position relative to top of key
+      const height = rect.height;
+      
+      // Map position to velocity: top (y=0) = 10, bottom (y=height) = 127
+      const velocity = Math.round(10 + (y / height) * (127 - 10));
+      return Math.max(10, Math.min(127, velocity));
+    }
+    
+    // Calculate velocity based on touch position
+    function calculateVelocityTouch(touch, element) {
+      const rect = element.getBoundingClientRect();
+      const y = touch.clientY - rect.top;
+      const height = rect.height;
+      
+      const velocity = Math.round(10 + (y / height) * (127 - 10));
+      return Math.max(10, Math.min(127, velocity));
+    }
+    
+    function noteOn(note, element, velocity) {
       if (activeNotes.has(note)) return;
       activeNotes.add(note);
       element.classList.add('pressed');
       
-      fetch('/note_on?note=' + note + '&velocity=100')
+      // Use calculated velocity from click position
+      fetch('/note_on?note=' + note + '&velocity=' + velocity)
         .catch(e => console.error('Error:', e));
     }
     
@@ -270,6 +424,13 @@ static const char keyboard_html[] = R"rawliteral(
         if (key) key.classList.remove('pressed');
       });
       activeNotes.clear();
+      
+      // Clear repeating notes state
+      repeatingNotes.forEach((info, note) => {
+        const key = keyboard.querySelector(`[data-note="${note}"]`);
+        if (key) key.classList.remove('pressed');
+      });
+      repeatingNotes.clear();
     });
   </script>
 </body>

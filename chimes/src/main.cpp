@@ -6,6 +6,10 @@
 #include "httpserver.h"
 #include "midinote.h"
 #include "midiseq.h"
+#include "noterepeater.h"
+#include "logger.h"
+#include "timekeeping.h"
+#include "clockchimes.h"
 
 #ifndef OTA_HOSTNAME
 #define OTA_HOSTNAME "esp32s3"
@@ -27,27 +31,6 @@ static const char* WIFI_PASS = "murphalurf18";
 // Telnet server for remote logging
 WiFiServer telnetServer(23);
 WiFiClient telnetClient;
-
-// Custom print that outputs to both Serial and Telnet
-class DualOutput : public Print {
-public:
-  size_t write(uint8_t c) override {
-    size_t n = Serial.write(c);
-    if (telnetClient && telnetClient.connected()) {
-      telnetClient.write(c);
-    }
-    return n;
-  }
-  size_t write(const uint8_t *buffer, size_t size) override {
-    size_t n = Serial.write(buffer, size);
-    if (telnetClient && telnetClient.connected()) {
-      telnetClient.write(buffer, size);
-    }
-    return n;
-  }
-};
-
-DualOutput Log;
 
 static void wifi_connect() {
   WiFi.mode(WIFI_STA);
@@ -122,6 +105,9 @@ void setup() {
   chimes_begin();
   midinote_begin();
   midiseq_begin();
+  noterepeater_setup();
+  timekeeping.begin();
+  clockChimes.begin();
   Log.printf("Host: %s\n", OTA_HOSTNAME);
   Log.printf("Version: %s\n\n", APP_VERSION);
   Log.println("Setup complete!");
@@ -130,14 +116,18 @@ void setup() {
 void loop() {
   // Handle telnet connections
   if (WiFi.status() == WL_CONNECTED) {
-    // Check for new telnet clients
+    // Check for new telnet clients (only when a NEW client connects)
     if (telnetServer.hasClient()) {
-      // Disconnect old client if exists
-      if (telnetClient) {
-        telnetClient.stop();
+      WiFiClient newClient = telnetServer.available();
+      if (newClient) {
+        // Disconnect old client if exists
+        if (telnetClient && telnetClient.connected()) {
+          telnetClient.stop();
+        }
+        telnetClient = newClient;
+        Log.setTelnetClient(&telnetClient);
+        Log.println("\nTelnet client connected");
       }
-      telnetClient = telnetServer.available();
-      Log.println("\nTelnet client connected");
     }
     
     // Handle OTA
@@ -160,6 +150,15 @@ void loop() {
   
   // Update MIDI sequencer
   midiseq_loop();
+  
+  // Update note repeater
+  noterepeater_loop();
+  
+  // Update timekeeping (NTP sync)
+  timekeeping.update();
+  
+  // Update clock chimes
+  clockChimes.update();
   
   // Your app work here...
   chimes_loop();
