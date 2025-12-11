@@ -10,6 +10,8 @@
 #include "songs.h"
 #include "timekeeping.h"
 #include "clockchimes.h"
+#include "api_docs.h"
+#include "settings_page.h"
 
 static WebServer server(80);
 
@@ -97,8 +99,8 @@ int httpserver_get_log_index() {
   return logTotalCount;
 }
 
-// Handler for GET /
-static void handleRoot() {
+// Handler for GET /channels
+static void handleChannels() {
   String html = "<!DOCTYPE html><html><head>";
   html += "<meta name='viewport' content='width=device-width, initial-scale=1'>";
   html += "<style>";
@@ -327,7 +329,8 @@ static void handleLogsPoll() {
 }
 
 // Handler for GET /keyboard
-static void handleKeyboard() {
+// Handler for GET /
+static void handleRoot() {
   server.send(200, "text/html", get_keyboard_html());
 }
 
@@ -787,12 +790,24 @@ static void handleTimeNTPServer() {
   server.send(200, "application/json", "{\"success\":true}");
 }
 
+// Handler for GET /api
+static void handleAPIDocumentation() {
+  server.send(200, "text/html", API_DOCS_HTML);
+}
+
+// Handler for GET /settings
+static void handleSettings() {
+  server.send(200, "text/html", SETTINGS_PAGE_HTML);
+}
+
 extern "C" {
 
 void httpserver_begin() {
   // Register route handlers - use onNotFound pattern matching
   server.on("/", HTTP_GET, handleRoot);
-  server.on("/keyboard", HTTP_GET, handleKeyboard);
+  server.on("/api", HTTP_GET, handleAPIDocumentation);
+  server.on("/settings", HTTP_GET, handleSettings);
+  server.on("/channels", HTTP_GET, handleChannels);
   server.on("/logs", HTTP_GET, handleLogsPage);
   server.on("/logs/poll", HTTP_GET, handleLogsPoll);
   server.on("/note_on", HTTP_GET, handleNoteOn);

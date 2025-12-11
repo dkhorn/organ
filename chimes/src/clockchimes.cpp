@@ -38,6 +38,7 @@ void ClockChimes::begin() {
     chimeInProgress = false;
     pendingHourStrike = false;
     pendingStrikeCount = 0;
+    chimeEndTime = 0;
     
     // Load saved settings
     loadSettings();
@@ -60,13 +61,18 @@ void ClockChimes::update() {
         // Check if sequence finished
         if (!midiseq_is_playing()) {
             chimeInProgress = false;
+            chimeEndTime = millis();
             Log.println("Chime sequence finished");
-            
-            // If hour strike is pending, trigger it now
-            if (pendingHourStrike) {
-                pendingHourStrike = false;
-                strikeHour(pendingStrikeCount);
-            }
+        }
+        return;
+    }
+    
+    // Handle pending hour strike with delay after chime ends
+    if (pendingHourStrike) {
+        // Wait at least 500ms after chime ends before striking hour
+        if (millis() - chimeEndTime >= 500) {
+            pendingHourStrike = false;
+            strikeHour(pendingStrikeCount);
         }
         return;
     }

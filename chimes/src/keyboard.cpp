@@ -76,6 +76,28 @@ static const char keyboard_html[] = R"rawliteral(
       text-align: center;
       color: #888;
     }
+    .nav {
+      margin-top: 30px;
+      padding: 15px;
+      background: #1a1a1a;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .nav a {
+      color: #4CAF50;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 14px;
+      padding: 8px 16px;
+      border: 1px solid #4CAF50;
+      border-radius: 4px;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    .nav a:hover {
+      background: #4CAF50;
+      color: white;
+    }
     .song-controls {
       margin-top: 20px;
       display: flex;
@@ -433,6 +455,12 @@ static const char keyboard_html[] = R"rawliteral(
       repeatingNotes.clear();
     });
   </script>
+  
+  <div class="nav">
+    <a href="/channels">Channels</a>
+    <a href="/settings">Settings</a>
+    <a href="/api">API Docs</a>
+  </div>
 </body>
 </html>
 )rawliteral";

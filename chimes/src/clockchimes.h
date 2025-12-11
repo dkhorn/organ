@@ -144,6 +144,7 @@ private:
     bool chimeInProgress;
     bool pendingHourStrike;
     uint8_t pendingStrikeCount;
+    unsigned long chimeEndTime;  // Timestamp when chime sequence finished
     
     static const char* NVS_NAMESPACE;
     
