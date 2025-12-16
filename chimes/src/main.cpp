@@ -10,6 +10,7 @@
 #include "logger.h"
 #include "timekeeping.h"
 #include "clockchimes.h"
+#include "midireceiver.h"
 
 #ifndef OTA_HOSTNAME
 #define OTA_HOSTNAME "esp32s3"
@@ -35,17 +36,17 @@ WiFiClient telnetClient;
 static void wifi_connect() {
   WiFi.mode(WIFI_STA);
   WiFi.begin(WIFI_SSID, WIFI_PASS);
-  Serial.print("Connecting to WiFi");
+  // Serial.print("Connecting to WiFi");
   uint32_t t0 = millis();
   while (WiFi.status() != WL_CONNECTED) {
     delay(200);
-    Serial.print(".");
+    // Serial.print(".");
     if ((millis() - t0) > 15000) {
-      Serial.println(" timeout!");
+      // Serial.println(" timeout!");
       return;
     }
   }
-  Serial.println(" connected!");
+  // Serial.println(" connected!");
 }
 
 static void ota_begin() {
@@ -87,7 +88,7 @@ static void ota_begin() {
 
 void setup() {
   
-  Serial.begin(115200);
+  // Serial.begin(115200);
   delay(200);
 
   Log.println("\n\n=== Chime Ctrl ===");
@@ -106,6 +107,7 @@ void setup() {
   midinote_begin();
   midiseq_begin();
   noterepeater_setup();
+  midiReceiver.begin();
   timekeeping.begin();
   clockChimes.begin();
   Log.printf("Host: %s\n", OTA_HOSTNAME);
@@ -147,6 +149,9 @@ void loop() {
   //   chime_index = (chime_index + 1) % 20;
   //   Log.printf("Rang chime %d\n", chime_index);
   // }
+  
+  // Update MIDI receiver
+  midiReceiver.update();
   
   // Update MIDI sequencer
   midiseq_loop();

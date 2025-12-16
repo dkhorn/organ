@@ -5,7 +5,8 @@
 UnifiedLogger Log;
 
 size_t UnifiedLogger::write(uint8_t c) {
-  size_t n = Serial.write(c);
+  size_t n = 0;
+  // Serial.write(c);
   if (telnetClient && telnetClient->connected()) {
     telnetClient->write(c);
   }
@@ -13,9 +14,10 @@ size_t UnifiedLogger::write(uint8_t c) {
 }
 
 size_t UnifiedLogger::write(const uint8_t *buffer, size_t size) {
-  size_t n = Serial.write(buffer, size);
+  size_t n = 0;
+  // Serial.write(buffer, size);
   if (telnetClient && telnetClient->connected()) {
-    telnetClient->write(buffer, size);
+    n = telnetClient->write(buffer, size);
   }
   
   // Send raw buffer to HTTP logger (it will handle String building if enabled)

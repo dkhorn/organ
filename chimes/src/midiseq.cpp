@@ -53,8 +53,8 @@ void midiseq_play() {
   playing = true;
   paused = false;
   
-  Serial.printf("Starting MIDI playback: %d events, %d us/tick\n", 
-                num_events, microsec_per_tick);
+  // Serial.printf("Starting MIDI playback: %d events, %d us/tick\n", 
+  //               num_events, microsec_per_tick);
 }
 
 void midiseq_stop() {
@@ -84,8 +84,8 @@ bool midiseq_is_playing() {
 
 void midiseq_set_tempo(uint16_t tempo_bpm) {
   calculate_timing(tempo_bpm);
-  Serial.printf("Tempo changed to %d BPM (%d us/tick)\n", 
-                tempo_bpm, microsec_per_tick);
+  // Serial.printf("Tempo changed to %d BPM (%d us/tick)\n", 
+  //               tempo_bpm, microsec_per_tick);
 }
 
 void midiseq_loop() {
@@ -155,7 +155,7 @@ void midiseq_loop() {
   
   // Check if sequence finished
   if (current_event >= num_events) {
-    Serial.println("MIDI sequence finished");
+    // Serial.println("MIDI sequence finished");
     midiseq_stop();
   }
 }

@@ -101,8 +101,8 @@ static const int NOTE_TO_CHANNEL[21] = {
 struct ChimeCalibration {
   uint8_t min_duty_pct;  // Minimum duty % (for velocity=1)
   uint8_t max_duty_pct;  // Maximum duty % (for velocity=127)
-  uint8_t kick_ms_min;   // Kick hold time at max duty (shorter)
-  uint8_t kick_ms_max;   // Kick hold time at min duty (longer)
+  uint16_t kick_ms_min;   // Kick hold time at max duty (shorter)
+  uint16_t kick_ms_max;   // Kick hold time at min duty (longer)
 };
 
 static ChimeCalibration CALIBRATION[21] = {
@@ -135,7 +135,7 @@ struct Strike {
   StrikeState st = StrikeState::IDLE;
   uint32_t t0 = 0; // ms start time
   uint8_t duty_pct = 100; // Initial duty for this strike
-  uint8_t kick_hold_ms = KICK_MS;  // Kick hold time in ms
+  uint16_t kick_hold_ms = KICK_MS;  // Kick hold time in ms (uint16_t supports up to 65535ms)
 };
 static Strike S[21];
 

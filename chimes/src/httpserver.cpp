@@ -390,7 +390,7 @@ static void handleNoteOff() {
 void handleAllOff() {
   midiseq_stop();
   all_off();
-  Serial.println("All notes off (panic)");
+  // Serial.println("All notes off (panic)");
   server.send(200, "text/plain", "All notes off");
 }
 
@@ -514,7 +514,7 @@ static void handlePlaySong() {
     response += " (" + String(tempo) + " BPM)";
   }
   server.send(200, "text/plain", response);
-  Serial.println(response);
+  // Serial.println(response);
 }
 
 // Handle /songs endpoint - list all available songs
@@ -535,7 +535,7 @@ static void handleListSongs() {
 static void handleSeqStop() {
   midiseq_stop();
   server.send(200, "text/plain", "Sequence stopped");
-  Serial.println("Sequence stopped");
+  // Serial.println("Sequence stopped");
 }
 
 // Handle /seq_pause endpoint
@@ -857,7 +857,7 @@ void httpserver_begin() {
   
   // Start server
   server.begin();
-  Serial.println("HTTP server started on port 80");
+  // Serial.println("HTTP server started on port 80");
 }
 
 void httpserver_loop() {

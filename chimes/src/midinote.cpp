@@ -55,9 +55,9 @@ void note_on(uint8_t midi_note, uint8_t velocity) {
     // Ring the chime
     ring_chime(chime_note, velocity);
     
-    Serial.printf("MIDI Note On: %d -> Chime: %d\n", midi_note, chime_note);
+    // Serial.printf("MIDI Note On: %d -> Chime: %d\n", midi_note, chime_note);
   } else {
-    Serial.printf("MIDI Note On: %d -> Out of range\n", midi_note);
+    // Serial.printf("MIDI Note On: %d -> Out of range\n", midi_note);
   }
 }
 
@@ -71,7 +71,7 @@ void note_off(uint8_t midi_note, uint8_t velocity) {
   note_state[midi_note] = false;
   
   // Nothing else to do until we add dampers
-  Serial.printf("MIDI Note Off: %d\n", midi_note);
+  // Serial.printf("MIDI Note Off: %d\n", midi_note);
 }
 
 void all_off() {
@@ -86,7 +86,7 @@ void all_off() {
   // Stop all repeating notes
   stop_all_repeated_notes();
   
-  Serial.println("All notes off");
+  // Serial.println("All notes off");
 }
 
 } // extern "C"

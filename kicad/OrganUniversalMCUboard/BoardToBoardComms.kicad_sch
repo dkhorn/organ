@@ -5,6 +5,177 @@
 	(uuid "7d3e3313-9507-44b0-9f6c-2af88932d9e1")
 	(paper "A4")
 	(lib_symbols
+		(symbol "Connector_Generic:Conn_01x03"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x03"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Conn_01x03_1_1"
+				(rectangle
+					(start -1.27 3.81)
+					(end 1.27 -3.81)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start -1.27 2.667)
+					(end 0 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -5.08 2.54 0)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -2.54 0)
+					(length 3.81)
+					(name "Pin_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Connector_Generic:Conn_01x04"
 			(pin_names
 				(offset 1.016)
@@ -195,6 +366,145 @@
 						)
 					)
 					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:C"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "C"
+				(at 0.635 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "C"
+				(at 0.635 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0.9652 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Unpolarized capacitor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "cap capacitor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "C_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "C_0_1"
+				(polyline
+					(pts
+						(xy -2.032 0.762) (xy 2.032 0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.032 -0.762) (xy 2.032 -0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "C_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 2.794)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 2.794)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1270,131 +1580,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "power:+5V"
-			(power)
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "#PWR"
-				(at 0 -3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Value" "+5V"
-				(at 0 3.556 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Power symbol creates a global label with name \"+5V\""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "global power"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "+5V_0_1"
-				(polyline
-					(pts
-						(xy -0.762 1.27) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "+5V_1_1"
-				(pin power_in line
-					(at 0 0 90)
-					(length 0)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "power:GND"
 			(power)
 			(pin_numbers
@@ -1571,16 +1756,6 @@
 	)
 	(wire
 		(pts
-			(xy 80.01 74.93) (xy 80.01 78.74)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "169a2f6d-6f82-4d00-8e39-560fdd545b57")
-	)
-	(wire
-		(pts
 			(xy 68.58 45.72) (xy 83.82 45.72)
 		)
 		(stroke
@@ -1671,7 +1846,7 @@
 	)
 	(wire
 		(pts
-			(xy 80.01 78.74) (xy 101.6 78.74)
+			(xy 80.01 74.93) (xy 119.38 74.93)
 		)
 		(stroke
 			(width 0)
@@ -1781,16 +1956,6 @@
 	)
 	(wire
 		(pts
-			(xy 101.6 74.93) (xy 101.6 78.74)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "95c64f7b-c071-4eb3-a8cb-c132f92a9bc5")
-	)
-	(wire
-		(pts
 			(xy 143.51 74.93) (xy 143.51 69.85)
 		)
 		(stroke
@@ -1798,16 +1963,6 @@
 			(type default)
 		)
 		(uuid "a492a1dc-c1d1-4fcc-9228-c21485d31f93")
-	)
-	(wire
-		(pts
-			(xy 119.38 74.93) (xy 101.6 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a80e517b-ae73-4050-b701-6a248f5b1b43")
 	)
 	(wire
 		(pts
@@ -1870,7 +2025,7 @@
 		(uuid "f9f82f34-5975-419c-9e82-f5bcbeabea24")
 	)
 	(label "CAN_RXD"
-		(at 101.6 78.74 0)
+		(at 101.6 74.93 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2018,6 +2173,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 163.83 45.72 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "08d0b561-c6bf-4c2e-bb7f-06aee5541958")
+		(property "Reference" "CD_U5"
+			(at 167.64 44.4499 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 167.64 46.9899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 164.7952 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 163.83 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 163.83 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "dcebeea8-828a-4303-8cdb-12cba7fc7a7e")
+		)
+		(pin "2"
+			(uuid "e8c2cb67-b3b1-4ca7-be1e-5a4affb99377")
+		)
+		(instances
+			(project "OrganUniversalMCUboard"
+				(path "/941f81de-fb37-4087-b582-01c965c3f0ac/82107bef-a801-4c3d-ac88-a6fb788da9b1"
+					(reference "CD_U5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+3.3V")
 		(at 125.73 36.83 0)
 		(unit 1)
@@ -2084,72 +2309,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+5V")
-		(at 167.64 77.47 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "14d6f314-53fe-4f5d-859a-60fa8548dbc6")
-		(property "Reference" "#PWR017"
-			(at 167.64 73.66 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "SYS_5V"
-			(at 167.64 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 167.64 77.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 167.64 77.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 167.64 77.47 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "a1e58380-c066-4f1a-b6c7-d2270962e075")
-		)
-		(instances
-			(project "OrganUniversalMCUboard"
-				(path "/941f81de-fb37-4087-b582-01c965c3f0ac/82107bef-a801-4c3d-ac88-a6fb788da9b1"
-					(reference "#PWR017")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Jumper:SolderJumper_3_Open")
 		(at 80.01 69.85 270)
 		(unit 1)
@@ -2159,7 +2318,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "15324f57-62f3-47dd-93f2-29489306910e")
-		(property "Reference" "SJ_COMM_RX"
+		(property "Reference" "SJ_COMM_RX1"
 			(at 82.55 68.5799 90)
 			(effects
 				(font
@@ -2177,7 +2336,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Jumper:SolderJumper-3_P1.3mm_Open_RoundedPad1.0x1.5mm"
 			(at 80.01 69.85 0)
 			(effects
 				(font
@@ -2216,83 +2375,7 @@
 		(instances
 			(project "OrganUniversalMCUboard"
 				(path "/941f81de-fb37-4087-b582-01c965c3f0ac/82107bef-a801-4c3d-ac88-a6fb788da9b1"
-					(reference "SJ_COMM_RX")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector_Generic:Conn_01x04")
-		(at 172.72 72.39 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "2d316919-fc1a-4831-a051-42512f4d9001")
-		(property "Reference" "J6"
-			(at 175.26 72.3899 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "CAN"
-			(at 175.26 74.9299 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 172.72 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 172.72 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 172.72 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "4"
-			(uuid "807564be-24d2-48d9-97e1-47f6cd49eb95")
-		)
-		(pin "2"
-			(uuid "d9524537-ceb5-47bd-bc2f-6d2ca078c8e7")
-		)
-		(pin "1"
-			(uuid "d701f39c-0bd0-46d3-beab-9c5937c57176")
-		)
-		(pin "3"
-			(uuid "e3da1d8c-2170-4c31-beeb-39139d4c4c50")
-		)
-		(instances
-			(project "OrganUniversalMCUboard"
-				(path "/941f81de-fb37-4087-b582-01c965c3f0ac/82107bef-a801-4c3d-ac88-a6fb788da9b1"
-					(reference "J6")
+					(reference "SJ_COMM_RX1")
 					(unit 1)
 				)
 			)
@@ -2308,7 +2391,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3f5e3323-d942-4dae-89c4-fcd0a53209f5")
-		(property "Reference" "SJ_COMM_TX"
+		(property "Reference" "SJ_COMM_TX1"
 			(at 90.17 44.4499 90)
 			(effects
 				(font
@@ -2326,7 +2409,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Jumper:SolderJumper-3_P1.3mm_Open_RoundedPad1.0x1.5mm"
 			(at 87.63 45.72 0)
 			(effects
 				(font
@@ -2365,7 +2448,7 @@
 		(instances
 			(project ""
 				(path "/941f81de-fb37-4087-b582-01c965c3f0ac/82107bef-a801-4c3d-ac88-a6fb788da9b1"
-					(reference "SJ_COMM_TX")
+					(reference "SJ_COMM_TX1")
 					(unit 1)
 				)
 			)
@@ -2399,7 +2482,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 113.03 86.36 0)
 			(effects
 				(font
@@ -2601,7 +2684,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
 			(at 146.05 72.39 0)
 			(effects
 				(font
@@ -2644,6 +2727,145 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+3.3V")
+		(at 163.83 41.91 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "81bfe2fa-fd0a-4187-96b4-65c25bacd395")
+		(property "Reference" "#PWR036"
+			(at 163.83 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 163.83 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 163.83 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 163.83 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 163.83 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "88467da0-5a7c-4b90-b971-7c07c2becb49")
+		)
+		(instances
+			(project "OrganUniversalMCUboard"
+				(path "/941f81de-fb37-4087-b582-01c965c3f0ac/82107bef-a801-4c3d-ac88-a6fb788da9b1"
+					(reference "#PWR036")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x03")
+		(at 172.72 72.39 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "94980b11-7157-4c63-be6b-a0e665f7c783")
+		(property "Reference" "J6"
+			(at 175.26 71.1199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "CAN"
+			(at 175.26 73.6599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical"
+			(at 172.72 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 172.72 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 172.72 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fa5eb2bb-f788-4278-8b66-4f46d438289b")
+		)
+		(pin "3"
+			(uuid "9241e3c3-62c4-4bb8-8039-6d76573e0d36")
+		)
+		(pin "2"
+			(uuid "9e325f6f-3d02-4778-bcf2-6486b12fd443")
+		)
+		(instances
+			(project ""
+				(path "/941f81de-fb37-4087-b582-01c965c3f0ac/82107bef-a801-4c3d-ac88-a6fb788da9b1"
+					(reference "J6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R_US")
 		(at 64.77 69.85 90)
 		(unit 1)
@@ -2653,7 +2875,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b2d90638-f5be-4a46-a8e1-d63766e6d7bc")
-		(property "Reference" "RS_UART_RX"
+		(property "Reference" "RS_UART_RX1"
 			(at 64.77 63.5 90)
 			(effects
 				(font
@@ -2669,7 +2891,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 65.024 68.834 90)
 			(effects
 				(font
@@ -2705,7 +2927,7 @@
 		(instances
 			(project "OrganUniversalMCUboard"
 				(path "/941f81de-fb37-4087-b582-01c965c3f0ac/82107bef-a801-4c3d-ac88-a6fb788da9b1"
-					(reference "RS_UART_RX")
+					(reference "RS_UART_RX1")
 					(unit 1)
 				)
 			)
@@ -2721,7 +2943,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b90ceab2-7bc7-46ae-a620-44c05aa4e1c0")
-		(property "Reference" "R_TERM"
+		(property "Reference" "R_TERM1"
 			(at 148.59 76.1999 0)
 			(effects
 				(font
@@ -2739,7 +2961,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 146.05 77.47 0)
 			(effects
 				(font
@@ -2775,7 +2997,7 @@
 		(instances
 			(project "OrganUniversalMCUboard"
 				(path "/941f81de-fb37-4087-b582-01c965c3f0ac/82107bef-a801-4c3d-ac88-a6fb788da9b1"
-					(reference "R_TERM")
+					(reference "R_TERM1")
 					(unit 1)
 				)
 			)
@@ -2842,6 +3064,72 @@
 			(project "OrganUniversalMCUboard"
 				(path "/941f81de-fb37-4087-b582-01c965c3f0ac/82107bef-a801-4c3d-ac88-a6fb788da9b1"
 					(reference "#PWR015")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 163.83 49.53 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "db1269f9-02cb-4e34-b3a8-251cd2dfc5eb")
+		(property "Reference" "#PWR037"
+			(at 163.83 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 163.83 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 163.83 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 163.83 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 163.83 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "11b0cc1c-7bc2-4f76-8e56-846a1818e0d2")
+		)
+		(instances
+			(project "OrganUniversalMCUboard"
+				(path "/941f81de-fb37-4087-b582-01c965c3f0ac/82107bef-a801-4c3d-ac88-a6fb788da9b1"
+					(reference "#PWR037")
 					(unit 1)
 				)
 			)
@@ -2963,7 +3251,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_JST:JST_PH_B4B-PH-K_1x04_P2.00mm_Vertical"
 			(at 135.89 36.83 0)
 			(effects
 				(font
@@ -3021,7 +3309,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ef675e80-f902-4d86-8425-703b0ee06c3a")
-		(property "Reference" "RS_UART_TX"
+		(property "Reference" "RS_UART_TX1"
 			(at 64.77 39.37 90)
 			(effects
 				(font
@@ -3037,7 +3325,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 65.024 44.704 90)
 			(effects
 				(font
@@ -3073,7 +3361,7 @@
 		(instances
 			(project ""
 				(path "/941f81de-fb37-4087-b582-01c965c3f0ac/82107bef-a801-4c3d-ac88-a6fb788da9b1"
-					(reference "RS_UART_TX")
+					(reference "RS_UART_TX1")
 					(unit 1)
 				)
 			)
