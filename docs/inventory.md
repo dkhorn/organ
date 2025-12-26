@@ -183,13 +183,14 @@ Descriptions are factual; condition notes are included where relevant.
 - M5 — Violin / Flachflute, 1′ (49 pipes)
 
 ### Wood Ranks
-- W1 — Stopped Flute, 4′ physical  
-  (61 wood + 24 metal treble, mitred basses)
-- W2 — Stopped Flute, 4′ physical  
-  (61 wood + 24 metal treble)
-- W3 — Large Stopped Flute, 8′ physical  
-  (16′ pitch, wide scale)
-
+- W1 — Stopped Flute, 4′ physical  (8' pitch)
+  (7 octaves: 61 wood + 24 metal treble, mitred basses)
+- W2 — Stopped Flute, 8′ physical  (16' pitch)
+  (8 octaves: 73 wood + 24 metal treble)
+- W3 — Wide-scale "tibia"-ish Stopped Flute, 8′ physical  (16' pitch) 
+  (bass only - 2 octaves: 24 wood pipes) 
+### Reed
+- R1 - Wicks free-reed subbass box 16' (1 octave, 12 notes)
 ---
 
 ## 7. Solenoids & Small Parts

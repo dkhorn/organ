@@ -106,6 +106,7 @@ const char API_DOCS_HTML[] = R"rawliteral(
             <li><a href="#sequencer">MIDI Sequencer</a></li>
             <li><a href="#repeater">Note Repeater</a></li>
             <li><a href="#songs">Songs</a></li>
+            <li><a href="#files">MIDI Files</a></li>
             <li><a href="#misc">Miscellaneous</a></li>
         </ul>
     </div>
@@ -478,6 +479,97 @@ Response: {
         <div class="example">Example: /play/jingleBells</div>
     </div>
 
+    <h2 id="files">MIDI Files</h2>
+    
+    <div class="endpoint">
+        <span class="method get">GET</span>
+        <span class="path">/files</span>
+        <div class="description">List all MIDI files stored in SPIFFS with storage statistics</div>
+        <div class="example">
+Response: {
+  "files": [
+    {"name": "test.mid", "size": 1234},
+    {"name": "melody.mid", "size": 5678}
+  ],
+  "storage": {
+    "total": 196608,
+    "used": 6912,
+    "free": 189696
+  }
+}
+        </div>
+    </div>
+
+    <div class="endpoint">
+        <span class="method post">POST</span>
+        <span class="path">/files/upload</span>
+        <div class="description">Upload a MIDI file to SPIFFS storage (multipart/form-data)</div>
+        <div class="params">
+            <strong>Form Data:</strong><br>
+            <span class="param">file</span> - MIDI file to upload (must have valid MThd header)<br>
+            Maximum filename length: 31 characters<br>
+            Files stored in /midi directory
+        </div>
+        <div class="example">
+Example (curl):
+curl -X POST -F "file=@song.mid" http://chime-ctrl/files/upload
+
+Response: {"success":true,"message":"File uploaded"}
+        </div>
+    </div>
+
+    <div class="endpoint">
+        <span class="method get">GET</span>
+        <span class="path">/files/&lt;filename&gt;</span>
+        <div class="description">Download a MIDI file from storage</div>
+        <div class="params">
+            <strong>Path Parameter:</strong><br>
+            <span class="param">filename</span> - Name of the file to download
+        </div>
+        <div class="example">
+Example: /files/melody.mid
+
+Returns file with Content-Type: audio/midi
+        </div>
+    </div>
+
+    <div class="endpoint">
+        <span class="method post">DELETE</span>
+        <span class="path">/files/&lt;filename&gt;</span>
+        <div class="description">Delete a MIDI file from storage</div>
+        <div class="params">
+            <strong>Path Parameter:</strong><br>
+            <span class="param">filename</span> - Name of the file to delete
+        </div>
+        <div class="example">
+Example (curl):
+curl -X DELETE http://chime-ctrl/files/test.mid
+
+Response: {"success":true,"message":"File deleted"}
+        </div>
+    </div>
+
+    <div class="endpoint">
+        <span class="method post">POST</span>
+        <span class="path">/files/play</span>
+        <div class="description">Play a stored MIDI file with optional playback parameters</div>
+        <div class="params">
+            <strong>Parameters:</strong><br>
+            <span class="param">name</span> - Filename to play (required)<br>
+            <span class="param">velocity</span> - Velocity scale factor (0.0-2.0, default 1.0)<br>
+            <span class="param">tempo</span> - Tempo scale factor (0.1-4.0, default 1.0)<br>
+            <span class="param">transpose</span> - Semitone transposition (-12 to +12, default 0)
+        </div>
+        <div class="example">
+Examples:
+/files/play?name=melody.mid
+/files/play?name=song.mid&amp;velocity=0.8&amp;tempo=1.5
+/files/play?name=test.mid&amp;transpose=5&amp;velocity=1.2
+
+Response: {"success":true,"message":"Playback started"}
+        </div>
+    </div>
+
     <h2 id="misc">Miscellaneous</h2>
 
     <div class="endpoint">
@@ -514,10 +606,14 @@ Response: {
     <ul>
         <li>All settings are persisted to NVS (Non-Volatile Storage) and survive reboots and OTA updates</li>
         <li>MIDI note numbers: Middle C (C4) = 60, A4 = 69</li>
+        <li>Valid chime range: A4 to E6 (MIDI notes 69-88)</li>
         <li>Clock chimes trigger automatically at 15, 30, 45, and 00 minutes past each hour</li>
         <li>Quiet mode scales velocities proportionally during specified hours</li>
         <li>Silence mode completely disables chimes during specified hours</li>
         <li>All time-based settings use local time (based on timezone offset)</li>
+        <li>MIDI files are stored in SPIFFS (192KB partition) and support standard MIDI format 0/1</li>
+        <li>MIDI file playback supports only Note On/Off events (track 0, max 1024 events)</li>
+        <li>Multiple MIDI input sources: UART (GPIO 44, 31250 baud), UDP (port 21928, MUDP-v1), and file playback</li>
     </ul>
 
     <p style="text-align: center; color: #999; margin-top: 40px;">

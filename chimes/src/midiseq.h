@@ -3,6 +3,7 @@
 #define MIDISEQ_H
 
 #include <stdint.h>
+#include <stddef.h>  // For size_t
 
 #ifdef __cplusplus
 extern "C" {
@@ -48,6 +49,19 @@ void midiseq_loop();
 
 // Set tempo during playback
 void midiseq_set_tempo(uint16_t tempo_bpm);
+
+// Set tempo scale (0.1-4.0x)
+void midiseq_set_tempo_scale(float scale);
+
+// Set velocity scale (0.0-2.0x)
+void midiseq_set_velocity_scale(float scale);
+
+// Set transpose in semitones (-12 to +12)
+void midiseq_set_transpose(int8_t semitones);
+
+// Load MIDI file from buffer (parses standard MIDI file format)
+// Returns true if successful
+bool midiseq_load_from_buffer(const uint8_t* data, size_t size);
 
 #ifdef __cplusplus
 }

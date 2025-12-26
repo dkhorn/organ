@@ -10,6 +10,8 @@
 #include "songs.h"
 #include "timekeeping.h"
 #include "clockchimes.h"
+#include "midiudp.h"
+#include "midifiles.h"
 #include "api_docs.h"
 #include "settings_page.h"
 
@@ -582,6 +584,31 @@ static void handleClockStatus() {
   server.send(200, "application/json", json);
 }
 
+// Handler for GET /status - system status including MIDI/UDP
+static void handleStatus() {
+  String json = "{";
+  json += "\"uptime\":" + String(millis()) + ",";
+  json += "\"wifi\":{";
+  json += "\"connected\":" + String(WiFi.status() == WL_CONNECTED ? "true" : "false") + ",";
+  json += "\"ip\":\"" + WiFi.localIP().toString() + "\",";
+  json += "\"rssi\":" + String(WiFi.RSSI());
+  json += "},";
+  json += "\"midiUdp\":{";
+  json += "\"listening\":" + String(midiUDP.isListening() ? "true" : "false") + ",";
+  json += "\"port\":" + String(midiUDP.getPort()) + ",";
+  json += "\"packetsReceived\":" + String(midiUDP.getPacketsReceived()) + ",";
+  json += "\"messagesReceived\":" + String(midiUDP.getMessagesReceived()) + ",";
+  json += "\"packetsDropped\":" + String(midiUDP.getPacketsDropped());
+  json += "},";
+  json += "\"time\":{";
+  json += "\"synced\":" + String(timekeeping.isSynced() ? "true" : "false") + ",";
+  json += "\"timestamp\":" + String(timekeeping.getTimestamp());
+  json += "}";
+  json += "}";
+  
+  server.send(200, "application/json", json);
+}
+
 // Handler for POST /clock/enable
 static void handleClockEnable() {
   if (!server.hasArg("enabled")) {
@@ -800,6 +827,222 @@ static void handleSettings() {
   server.send(200, "text/html", SETTINGS_PAGE_HTML);
 }
 
+// Handler for GET /player - MIDI file player UI
+static void handlePlayer() {
+  String html = "<!DOCTYPE html><html><head>";
+  html += "<meta name='viewport' content='width=device-width, initial-scale=1'>";
+  html += "<title>MIDI Player</title>";
+  html += "<style>";
+  html += "body { font-family: Arial, sans-serif; margin: 20px; background: #f0f0f0; }";
+  html += "h1 { color: #333; }";
+  html += ".container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }";
+  html += ".file { display: flex; justify-content: space-between; align-items: center; padding: 15px; margin: 10px 0; background: #f9f9f9; border-radius: 5px; border-left: 4px solid #4CAF50; }";
+  html += ".file-info { flex-grow: 1; }";
+  html += ".file-name { font-weight: bold; font-size: 16px; }";
+  html += ".file-size { color: #666; font-size: 14px; }";
+  html += ".controls { display: flex; gap: 10px; align-items: center; }";
+  html += "button { padding: 8px 16px; font-size: 14px; border: none; background: #4CAF50; color: white; border-radius: 4px; cursor: pointer; }";
+  html += "button:hover { background: #45a049; }";
+  html += "button.delete { background: #f44336; }";
+  html += "button.delete:hover { background: #da190b; }";
+  html += "input[type=number] { width: 60px; padding: 5px; border: 2px solid #ddd; border-radius: 4px; }";
+  html += ".upload { margin-bottom: 20px; padding: 15px; background: #e3f2fd; border-radius: 5px; }";
+  html += ".status { margin-top: 15px; padding: 10px; background: #e8f5e9; border-radius: 5px; display: none; }";
+  html += ".error { background: #ffebee !important; color: #c62828; }";
+  html += ".storage { margin-top: 15px; padding: 10px; background: #fff3e0; border-radius: 5px; font-size: 14px; }";
+  html += "</style></head><body>";
+  html += "<div class='container'>";
+  html += "<h1>MIDI File Player</h1>";
+  html += "<div class='upload'>";
+  html += "<input type='file' id='fileInput' accept='.mid,.midi' />";
+  html += "<button onclick='uploadFile()'>Upload</button>";
+  html += "</div>";
+  html += "<div id='storage' class='storage'>Loading storage info...</div>";
+  html += "<div id='fileList'>Loading files...</div>";
+  html += "<div id='status' class='status'></div>";
+  html += "</div>";
+  html += "<script>";
+  html += "function loadFiles() {";
+  html += "  fetch('/files').then(r => r.json()).then(data => {";
+  html += "    let html = '';";
+  html += "    if (data.files.length === 0) {";
+  html += "      html = '<p>No MIDI files uploaded yet.</p>';";
+  html += "    } else {";
+  html += "      data.files.forEach(f => {";
+  html += "        html += '<div class=\"file\">';";
+  html += "        html += '<div class=\"file-info\"><div class=\"file-name\">' + f.name + '</div>';";
+  html += "        html += '<div class=\"file-size\">' + f.size + ' bytes</div></div>';";
+  html += "        html += '<div class=\"controls\">';";
+  html += "        html += '<label>Vel:</label><input type=\"number\" id=\"vel_' + f.name + '\" value=\"1.0\" min=\"0\" max=\"2\" step=\"0.1\" />';";
+  html += "        html += '<label>Tempo:</label><input type=\"number\" id=\"tempo_' + f.name + '\" value=\"1.0\" min=\"0.1\" max=\"4\" step=\"0.1\" />';";
+  html += "        html += '<label>Transpose:</label><input type=\"number\" id=\"trans_' + f.name + '\" value=\"0\" min=\"-12\" max=\"12\" />';";
+  html += "        html += '<button onclick=\"playFile(\\'' + f.name + '\\');\">Play</button>';";
+  html += "        html += '<button class=\"delete\" onclick=\"deleteFile(\\'' + f.name + '\\');\">Delete</button>';";
+  html += "        html += '</div></div>';";
+  html += "      });";
+  html += "    }";
+  html += "    document.getElementById('fileList').innerHTML = html;";
+  html += "    const st = data.storage;";
+  html += "    document.getElementById('storage').textContent = 'Storage: ' + (st.used/1024).toFixed(1) + ' KB used / ' + (st.total/1024).toFixed(1) + ' KB total (' + (st.free/1024).toFixed(1) + ' KB free)';";
+  html += "  });";
+  html += "}";
+  html += "function playFile(name) {";
+  html += "  const vel = document.getElementById('vel_' + name).value;";
+  html += "  const tempo = document.getElementById('tempo_' + name).value;";
+  html += "  const trans = document.getElementById('trans_' + name).value;";
+  html += "  fetch('/files/play?name=' + encodeURIComponent(name) + '&velocity=' + vel + '&tempo=' + tempo + '&transpose=' + trans, {method: 'POST'})";
+  html += "    .then(r => r.json()).then(d => showStatus(d.message, d.success));";
+  html += "}";
+  html += "function deleteFile(name) {";
+  html += "  if (!confirm('Delete ' + name + '?')) return;";
+  html += "  fetch('/files/' + encodeURIComponent(name), {method: 'DELETE'})";
+  html += "    .then(r => r.json()).then(d => { showStatus(d.message, d.success); loadFiles(); });";
+  html += "}";
+  html += "function uploadFile() {";
+  html += "  const input = document.getElementById('fileInput');";
+  html += "  if (!input.files[0]) { alert('Select a file first'); return; }";
+  html += "  const formData = new FormData();";
+  html += "  formData.append('file', input.files[0]);";
+  html += "  fetch('/files/upload', {method: 'POST', body: formData})";
+  html += "    .then(r => r.json()).then(d => { showStatus(d.message, d.success); if(d.success) loadFiles(); });";
+  html += "}";
+  html += "function showStatus(msg, ok) {";
+  html += "  const s = document.getElementById('status');";
+  html += "  s.textContent = msg;";
+  html += "  s.className = ok ? 'status' : 'status error';";
+  html += "  s.style.display = 'block';";
+  html += "  setTimeout(() => s.style.display = 'none', 3000);";
+  html += "}";
+  html += "loadFiles();";
+  html += "</script></body></html>";
+  
+  server.send(200, "text/html", html);
+}
+
+// ============================================================================
+// MIDI FILE MANAGER API HANDLERS
+// ============================================================================
+
+// Handler for GET /files - List all MIDI files
+static void handleFilesList() {
+  auto files = midiFiles.listFiles();
+  
+  String json = "{\"files\":[";
+  for (size_t i = 0; i < files.size(); i++) {
+    if (i > 0) json += ",";
+    json += "{\"name\":\"" + files[i].name + "\",\"size\":" + String(files[i].size) + "}";
+  }
+  json += "],\"storage\":{";
+  json += "\"total\":" + String(midiFiles.getTotalBytes()) + ",";
+  json += "\"used\":" + String(midiFiles.getUsedBytes()) + ",";
+  json += "\"free\":" + String(midiFiles.getFreeBytes());
+  json += "}}";
+  
+  server.send(200, "application/json", json);
+}
+
+// Handler for POST /files/upload - Upload a MIDI file
+static void handleFilesUpload() {
+  HTTPUpload& upload = server.upload();
+  static String uploadFilename;
+  static std::vector<uint8_t> uploadBuffer;
+  
+  if (upload.status == UPLOAD_FILE_START) {
+    uploadFilename = upload.filename;
+    uploadBuffer.clear();
+    uploadBuffer.reserve(32768);  // Pre-allocate 32KB
+    
+  } else if (upload.status == UPLOAD_FILE_WRITE) {
+    // Append data to buffer
+    uploadBuffer.insert(uploadBuffer.end(), upload.buf, upload.buf + upload.currentSize);
+    
+  } else if (upload.status == UPLOAD_FILE_END) {
+    // Upload complete, save file
+    bool success = midiFiles.uploadFile(uploadFilename, uploadBuffer.data(), uploadBuffer.size());
+    
+    uploadBuffer.clear();
+    uploadBuffer.shrink_to_fit();
+    
+    if (success) {
+      server.send(200, "application/json", "{\"success\":true,\"message\":\"File uploaded\"}");
+    } else {
+      server.send(500, "application/json", "{\"success\":false,\"message\":\"Upload failed\"}");
+    }
+    
+  } else if (upload.status == UPLOAD_FILE_ABORTED) {
+    uploadBuffer.clear();
+    uploadBuffer.shrink_to_fit();
+    server.send(500, "application/json", "{\"success\":false,\"message\":\"Upload aborted\"}");
+  }
+}
+
+// Handler for DELETE /files/<filename> - Delete a file
+static void handleFilesDelete() {
+  String uri = server.uri();
+  String filename = uri.substring(7);  // Remove "/files/"
+  
+  if (filename.length() == 0) {
+    server.send(400, "application/json", "{\"success\":false,\"message\":\"No filename specified\"}");
+    return;
+  }
+  
+  bool success = midiFiles.deleteFile(filename);
+  
+  if (success) {
+    server.send(200, "application/json", "{\"success\":true,\"message\":\"File deleted\"}");
+  } else {
+    server.send(404, "application/json", "{\"success\":false,\"message\":\"File not found\"}");
+  }
+}
+
+// Handler for GET /files/<filename> - Download a file
+static void handleFilesDownload() {
+  String uri = server.uri();
+  String filename = uri.substring(7);  // Remove "/files/"
+  
+  if (filename.length() == 0) {
+    server.send(400, "text/plain", "No filename specified");
+    return;
+  }
+  
+  uint8_t* data = nullptr;
+  size_t size = 0;
+  
+  if (!midiFiles.readFile(filename, &data, &size)) {
+    server.send(404, "text/plain", "File not found");
+    return;
+  }
+  
+  server.sendHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
+  server.send_P(200, "audio/midi", (const char*)data, size);
+  
+  free(data);
+}
+
+// Handler for POST /files/play - Play a MIDI file
+static void handleFilesPlay() {
+  if (!server.hasArg("name")) {
+    server.send(400, "application/json", "{\"success\":false,\"message\":\"Missing name parameter\"}");
+    return;
+  }
+  
+  String filename = server.arg("name");
+  
+  // Parse playback parameters (with defaults)
+  MIDIFileManager::PlaybackParams params;
+  params.velocityScale = server.hasArg("velocity") ? server.arg("velocity").toFloat() : 1.0f;
+  params.tempoScale = server.hasArg("tempo") ? server.arg("tempo").toFloat() : 1.0f;
+  params.transpose = server.hasArg("transpose") ? server.arg("transpose").toInt() : 0;
+  
+  bool success = midiFiles.playFile(filename, params);
+  
+  if (success) {
+    server.send(200, "application/json", "{\"success\":true,\"message\":\"Playback started\"}");
+  } else {
+    server.send(404, "application/json", "{\"success\":false,\"message\":\"File not found or invalid\"}");
+  }
+}
+
 extern "C" {
 
 void httpserver_begin() {
@@ -807,6 +1050,8 @@ void httpserver_begin() {
   server.on("/", HTTP_GET, handleRoot);
   server.on("/api", HTTP_GET, handleAPIDocumentation);
   server.on("/settings", HTTP_GET, handleSettings);
+  server.on("/player", HTTP_GET, handlePlayer);
+  server.on("/status", HTTP_GET, handleStatus);
   server.on("/channels", HTTP_GET, handleChannels);
   server.on("/logs", HTTP_GET, handleLogsPage);
   server.on("/logs/poll", HTTP_GET, handleLogsPoll);
@@ -839,6 +1084,13 @@ void httpserver_begin() {
   server.on("/time/timezone", HTTP_POST, handleTimeZone);
   server.on("/time/ntp", HTTP_POST, handleTimeNTPServer);
   
+  // MIDI file management routes
+  server.on("/files", HTTP_GET, handleFilesList);
+  server.on("/files/upload", HTTP_POST, []() {
+    server.send(200);
+  }, handleFilesUpload);
+  server.on("/files/play", HTTP_POST, handleFilesPlay);
+  
   // For parameterized routes, we'll handle them in onNotFound
   // and check the path prefix there
   server.onNotFound([]() {
@@ -850,6 +1102,15 @@ void httpserver_begin() {
       handleRingChannel();
     } else if (uri.startsWith("/play/")) {
       handlePlaySong();
+    } else if (uri.startsWith("/files/") && uri.length() > 7) {
+      // Handle /files/<filename> for download and delete
+      if (server.method() == HTTP_GET) {
+        handleFilesDownload();
+      } else if (server.method() == HTTP_DELETE) {
+        handleFilesDelete();
+      } else {
+        handleNotFound();
+      }
     } else {
       handleNotFound();
     }

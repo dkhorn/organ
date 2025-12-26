@@ -11,6 +11,8 @@
 #include "timekeeping.h"
 #include "clockchimes.h"
 #include "midireceiver.h"
+#include "midiudp.h"
+#include "midifiles.h"
 
 #ifndef OTA_HOSTNAME
 #define OTA_HOSTNAME "esp32s3"
@@ -108,6 +110,8 @@ void setup() {
   midiseq_begin();
   noterepeater_setup();
   midiReceiver.begin();
+  midiUDP.begin();  // Start MIDI/UDP receiver on port 21928
+  midiFiles.begin();  // Initialize MIDI file manager (SPIFFS)
   timekeeping.begin();
   clockChimes.begin();
   Log.printf("Host: %s\n", OTA_HOSTNAME);
@@ -116,6 +120,29 @@ void setup() {
 }
 
 void loop() {
+  // WiFi reconnection logic
+  static uint32_t lastWiFiCheck = 0;
+  static bool wasConnected = false;
+  if (millis() - lastWiFiCheck > 10000) {  // Check every 10 seconds
+    lastWiFiCheck = millis();
+    bool isConnected = (WiFi.status() == WL_CONNECTED);
+    
+    if (!isConnected) {
+      Log.println("WiFi disconnected, attempting to reconnect...");
+      wifi_connect();
+      if (WiFi.status() == WL_CONNECTED) {
+        Log.printf("WiFi reconnected! IP: %s\n", WiFi.localIP().toString().c_str());
+        // Notify timekeeping of reconnection
+        timekeeping.onWiFiReconnect();
+      }
+    } else if (!wasConnected && isConnected) {
+      // Just connected (state transition)
+      Log.printf("WiFi connected! IP: %s\n", WiFi.localIP().toString().c_str());
+      timekeeping.onWiFiReconnect();
+    }
+    wasConnected = isConnected;
+  }
+  
   // Handle telnet connections
   if (WiFi.status() == WL_CONNECTED) {
     // Check for new telnet clients (only when a NEW client connects)
@@ -149,9 +176,11 @@ void loop() {
   //   chime_index = (chime_index + 1) % 20;
   //   Log.printf("Rang chime %d\n", chime_index);
   // }
-  
   // Update MIDI receiver
   midiReceiver.update();
+  
+  // Update MIDI/UDP receiver
+  midiUDP.update();
   
   // Update MIDI sequencer
   midiseq_loop();

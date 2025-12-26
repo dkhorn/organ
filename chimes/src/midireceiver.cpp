@@ -1,6 +1,6 @@
 #include "midireceiver.h"
 #include "logger.h"
-#include "midinote.h"
+#include "midihandler.h"
 
 // MIDI uses UART at 31250 baud, 8-N-1
 #define MIDI_BAUD_RATE 31250
@@ -170,49 +170,37 @@ void MidiReceiver::update() {
 }
 
 void MidiReceiver::handleMessage() {
-    // Log the received MIDI message
+    // Reconstruct status byte from current parser state
+    uint8_t status = 0;
+    
     switch (state) {
         case ParserState::NOTE_OFF_2:
-            note_off(data1, 0);
-            // Log.printf("MIDI: Note Off  ch=%d note=%d vel=%d\n", channel + 1, data1, data2);
+            status = 0x80 | channel;
             break;
-            
         case ParserState::NOTE_ON_2:
-            if (data2 == 0) {
-                note_off(data1, 0);
-                // Note On with velocity 0 is treated as Note Off
-                // Log.printf("MIDI: Note Off  ch=%d note=%d vel=0\n", channel + 1, data1);
-            } else {
-                note_on(data1, data2);
-                // Log.printf("MIDI: Note On   ch=%d note=%d vel=%d\n", channel + 1, data1, data2);
-            }
+            status = 0x90 | channel;
             break;
-            
         case ParserState::POLY_AT_2:
-            // Log.printf("MIDI: Poly AT   ch=%d note=%d pressure=%d\n", channel + 1, data1, data2);
+            status = 0xA0 | channel;
             break;
-            
         case ParserState::CC_2:
-            // Log.printf("MIDI: CC        ch=%d controller=%d value=%d\n", channel + 1, data1, data2);
+            status = 0xB0 | channel;
             break;
-            
         case ParserState::PROGRAM_1:
-            // Log.printf("MIDI: Program   ch=%d program=%d\n", channel + 1, data1);
+            status = 0xC0 | channel;
             break;
-            
         case ParserState::CHANNEL_AT_1:
-            // Log.printf("MIDI: Chan AT   ch=%d pressure=%d\n", channel + 1, data1);
+            status = 0xD0 | channel;
             break;
-            
-        case ParserState::PITCH_2: {
-            int16_t pitchValue = (data2 << 7) | data1;  // 14-bit value
-            // Log.printf("MIDI: Pitch     ch=%d value=%d\n", channel + 1, pitchValue);
+        case ParserState::PITCH_2:
+            status = 0xE0 | channel;
             break;
-        }
-            
         default:
-            break;
+            return;  // Unknown state
     }
+    
+    // Delegate to common MIDI handler
+    handle_midi_message(status, data1, data2);
 }
 
 void MidiReceiver::reset() {

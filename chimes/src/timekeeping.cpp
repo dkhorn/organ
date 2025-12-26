@@ -18,6 +18,7 @@ void Timekeeping::begin() {
     synced = false;
     lastSyncAttempt = 0;
     lastSyncTime = 0;
+    lastSyncSuccessful = false;
     timezoneOffset = -18000;  // Eastern Time (UTC-5)
     strcpy(ntpServer, "pool.ntp.org");
     
@@ -45,7 +46,9 @@ void Timekeeping::update() {
     // Periodic NTP sync if WiFi is connected
     if (WiFi.status() == WL_CONNECTED) {
         unsigned long now = millis();
-        if (now - lastSyncAttempt >= SYNC_INTERVAL) {
+        // Use adaptive sync interval: daily if last sync succeeded, every minute if failed
+        unsigned long syncInterval = lastSyncSuccessful ? SYNC_INTERVAL_SUCCESS : SYNC_INTERVAL_FAILURE;
+        if (now - lastSyncAttempt >= syncInterval) {
             syncNTP();
         }
     }
@@ -112,7 +115,8 @@ bool Timekeeping::syncNTP() {
     lastSyncAttempt = millis();
     
     if (WiFi.status() != WL_CONNECTED) {
-        Log.println("NTP sync failed: WiFi not connected");
+        lastSyncSuccessful = false;
+        Log.println("NTP sync failed: WiFi not connected (will retry in 1 minute)");
         return false;
     }
     
@@ -127,10 +131,11 @@ bool Timekeeping::syncNTP() {
     if (now > 100000) {  // Successfully synchronized
         synced = true;
         lastSyncTime = now;
+        lastSyncSuccessful = true;
         
         char timeStr[32];
         getTimeString(timeStr, sizeof(timeStr));
-        Log.printf("NTP sync successful: %s\n", timeStr);
+        Log.printf("NTP sync successful: %s (next sync in 24h)\n", timeStr);
         
         // Save last sync time to NVS
         prefs.begin(NVS_NAMESPACE, false);
@@ -140,12 +145,19 @@ bool Timekeeping::syncNTP() {
         return true;
     }
     
-    Log.println("NTP sync failed: timeout");
+    lastSyncSuccessful = false;
+    Log.println("NTP sync failed: timeout (will retry in 1 minute)");
     return false;
 }
 
 time_t Timekeeping::getLastSyncTime() {
     return lastSyncTime;
+}
+
+void Timekeeping::onWiFiReconnect() {
+    Log.println("WiFi reconnected - triggering time sync...");
+    // Reset sync attempt timer to trigger immediate sync on next update()
+    lastSyncAttempt = 0;
 }
 
 bool Timekeeping::isSynced() {

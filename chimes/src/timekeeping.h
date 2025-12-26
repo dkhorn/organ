@@ -23,6 +23,12 @@ public:
     void update();
     
     /**
+     * Notify timekeeping that WiFi has (re)connected
+     * Triggers immediate time sync
+     */
+    void onWiFiReconnect();
+    
+    /**
      * Get current Unix timestamp
      */
     time_t getTimestamp();
@@ -107,8 +113,10 @@ private:
     // Runtime state
     bool synced;
     unsigned long lastSyncAttempt;
+    bool lastSyncSuccessful;
     
-    static const unsigned long SYNC_INTERVAL = 3600000; // 1 hour in ms
+    static const unsigned long SYNC_INTERVAL_SUCCESS = 86400000; // 24 hours in ms (daily)
+    static const unsigned long SYNC_INTERVAL_FAILURE = 60000;    // 1 minute in ms
     static const char* NVS_NAMESPACE;
 };
 

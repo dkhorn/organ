@@ -4,6 +4,8 @@
 #include "driver/sigmadelta.h"
 #include "logger.h"
 
+// #define MAKE_NO_SOUND 1
+
 // ---------- User-tweakable envelope ----------
 static const uint16_t KICK_DUTY = 100;      // % duty during lift
 static const uint32_t KICK_MS   = 35;       // ms
@@ -106,27 +108,27 @@ struct ChimeCalibration {
 };
 
 static ChimeCalibration CALIBRATION[21] = {
-  {50, 100, 35, 110}, // channel 0
-  {50, 100, 35, 110}, // channel 1
-  {54, 100, 35, 105}, // channel 2
-  {58, 100, 35, 112}, // channel 3
-  {51, 100, 35, 139}, // channel 4
-  {56, 100, 35, 95}, // channel 5
-  {58, 100, 35, 110}, // channel 6
-  {56, 100, 35, 135}, // channel 7
-  {53, 100, 35, 135}, // channel 8
-  {60, 100, 35, 94}, // channel 9
-  {59, 100, 35, 131}, // channel 10
-  {50, 100, 35, 135}, // channel 11
-  {60, 100, 35, 89}, // channel 12
-  {65, 100, 35, 80}, // channel 13
-  {58, 100, 35, 84}, // channel 14
-  {63, 100, 35, 72}, // channel 15
-  {53, 100, 35, 120}, // channel 16
-  {51, 100, 35, 102}, // channel 17
-  {66, 100, 35, 100}, // channel 18
-  {46, 100, 35, 133}, // channel 19
-  {46, 100, 35, 133}  // channel 20
+  {60, 100, 35, 70}, // channel 0
+  {60, 100, 35, 90}, // channel 1
+  {60, 100, 35, 75}, // channel 2
+  {65, 100, 35, 80}, // channel 3
+  {73, 100, 35, 80}, // channel 4
+  {70, 100, 35, 100}, // channel 5
+  {60, 98, 35, 90}, // channel 6
+  {60, 100, 35, 90}, // channel 7
+  {55, 100, 35, 80}, // channel 8
+  {60, 100, 35, 90}, // channel 9
+  {65, 100, 35, 100}, // channel 10
+  {72, 100, 35, 80}, // channel 11
+  {65, 100, 35, 100}, // channel 12
+  {60, 100, 35, 80}, // channel 13
+  {70, 100, 35, 130}, // channel 14
+  {78, 100, 35, 90}, // channel 15
+  {58, 100, 35, 95}, // channel 16
+  {65, 100, 35, 80}, // channel 17
+  {60, 100, 35, 80}, // channel 18
+  {57, 100, 35, 80}, // channel 19
+  {60, 100, 35, 100}  // channel 20
 };
 
 // ---------- Simple strike state machine ----------
@@ -145,6 +147,7 @@ static Strike S[21];
 static const int MAX_CONCURRENT_CHIMES = 6;
 
 static inline void setDutyPct(int ch, uint16_t dutyPct) {
+#ifndef MAKE_NO_SOUND
   if (ch < 0 || ch >= 21) return;
   Chan &C = CH[ch];
   dutyPct = (dutyPct > 100) ? 100 : dutyPct;
@@ -160,7 +163,7 @@ static inline void setDutyPct(int ch, uint16_t dutyPct) {
     case ChType::LEDC: {
       uint32_t maxv = (1u << LEDC_RES_BITS) - 1u;
       uint32_t val = (uint32_t)((dutyPct * maxv) / 100u);
-      ledcWrite(C.ledcChan, val);
+      ledcWrite(C.ledcPin, val);
       break;
     }
 
@@ -172,6 +175,7 @@ static inline void setDutyPct(int ch, uint16_t dutyPct) {
       break;
     }
   }
+#endif
 }
 
 static void initMCPWM() {
@@ -212,10 +216,9 @@ static void initLEDC() {
   // Initialize all 9 LEDC channels (12-20)
   for (int i = 12; i <= 20; ++i) {
     pinMode(CH[i].ledcPin, OUTPUT);  // Explicitly set pin mode
-    ledcSetup(i - 12, PWM_FREQ, LEDC_RES_BITS);       // use unique channels 0..8
-    ledcAttachPin(CH[i].ledcPin, i - 12);
+    ledcAttach(CH[i].ledcPin, PWM_FREQ, LEDC_RES_BITS);
     CH[i].ledcChan = i - 12;
-    ledcWrite(CH[i].ledcChan, 0);
+    ledcWrite(CH[i].ledcPin, 0);
   }
 }
 
