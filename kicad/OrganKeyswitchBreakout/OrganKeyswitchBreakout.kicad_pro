@@ -412,6 +412,10 @@
     [
       "cf1df97f-883a-4122-9971-552927dbf328",
       "Root"
+    ],
+    [
+      "2762c305-da54-4ba1-98cd-2e4ca4016d2b",
+      "breakout_chip"
     ]
   ],
   "text_variables": {}
