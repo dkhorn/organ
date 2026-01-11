@@ -122,7 +122,7 @@ static ChimeCalibration CALIBRATION[21] = {
   {72, 100, 35, 80}, // channel 11
   {65, 100, 35, 100}, // channel 12
   {60, 100, 35, 80}, // channel 13
-  {70, 100, 35, 130}, // channel 14
+  {70, 100, 35, 50}, // channel 14
   {78, 100, 35, 90}, // channel 15
   {58, 100, 35, 95}, // channel 16
   {65, 100, 35, 80}, // channel 17
