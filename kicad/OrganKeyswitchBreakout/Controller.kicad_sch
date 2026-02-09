@@ -2029,6 +2029,24 @@
 		(uuid "aba63813-9932-4e33-ae2b-1df2526a7653")
 	)
 	(junction
+		(at 143.51 115.57)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "af2a6f32-20f5-41f7-bc6f-4c4144590dae")
+	)
+	(junction
+		(at 123.19 110.49)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e929e504-7e9c-420b-9dd0-7cf4a325875a")
+	)
+	(junction
+		(at 133.35 113.03)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ea9d971b-baa0-4a4d-a448-04a998cb2a2f")
+	)
+	(junction
 		(at 158.75 151.13)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2065,10 +2083,6 @@
 		(uuid "1034c11d-bdde-4874-a23b-570b45252543")
 	)
 	(no_connect
-		(at 92.71 115.57)
-		(uuid "1ded497a-e3d7-423f-9aee-cc16299d0aee")
-	)
-	(no_connect
 		(at 92.71 118.11)
 		(uuid "21c46614-b3e3-4880-897a-933db15729e2")
 	)
@@ -2095,10 +2109,6 @@
 	(no_connect
 		(at 41.91 46.99)
 		(uuid "837f26f3-2430-4ef6-b9ab-8e8ad2dbabdc")
-	)
-	(no_connect
-		(at 92.71 113.03)
-		(uuid "8605ab99-3a1e-4620-93bb-e9e05a0316e2")
 	)
 	(no_connect
 		(at 41.91 64.77)
@@ -2136,9 +2146,25 @@
 		(at 41.91 69.85)
 		(uuid "f27f3116-f473-4a75-aea9-2a03910b3ce6")
 	)
-	(no_connect
-		(at 92.71 110.49)
-		(uuid "fc0266d1-d571-4216-90d9-d78387d1ce6f")
+	(wire
+		(pts
+			(xy 92.71 110.49) (xy 123.19 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "07f0595b-820c-48eb-ad9f-47ba91dca0e6")
+	)
+	(wire
+		(pts
+			(xy 143.51 106.68) (xy 143.51 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0a02753c-210b-4dc2-a0e3-baa3da26d27a")
 	)
 	(wire
 		(pts
@@ -2189,6 +2215,16 @@
 			(type default)
 		)
 		(uuid "1bf01d0c-1ba6-41a5-9a41-1457c43fcf74")
+	)
+	(wire
+		(pts
+			(xy 143.51 115.57) (xy 153.67 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "213f5a28-49db-4b30-b99a-220437261352")
 	)
 	(wire
 		(pts
@@ -2299,6 +2335,16 @@
 			(type default)
 		)
 		(uuid "4d2d9af2-1f58-4cf2-ab13-1e0e3041521e")
+	)
+	(wire
+		(pts
+			(xy 133.35 113.03) (xy 153.67 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4d5938bb-e49a-4d54-ba57-f15a01ba7634")
 	)
 	(wire
 		(pts
@@ -2442,6 +2488,16 @@
 	)
 	(wire
 		(pts
+			(xy 92.71 115.57) (xy 143.51 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8a7d3914-3dde-4eed-934b-05a6de365fa1")
+	)
+	(wire
+		(pts
 			(xy 130.81 138.43) (xy 130.81 148.59)
 		)
 		(stroke
@@ -2542,6 +2598,16 @@
 	)
 	(wire
 		(pts
+			(xy 92.71 113.03) (xy 133.35 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aa7d0a5e-e42f-4519-b5c1-87af63887df6")
+	)
+	(wire
+		(pts
 			(xy 115.57 87.63) (xy 92.71 87.63)
 		)
 		(stroke
@@ -2549,6 +2615,16 @@
 			(type default)
 		)
 		(uuid "b051f164-cbb0-45fd-98fd-7fb850c1d9e4")
+	)
+	(wire
+		(pts
+			(xy 133.35 106.68) (xy 133.35 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b277dfbf-30c7-463e-bb60-69d5affb3dc5")
 	)
 	(wire
 		(pts
@@ -2569,6 +2645,16 @@
 			(type default)
 		)
 		(uuid "b99702d2-fe30-436d-8913-5336debd2c31")
+	)
+	(wire
+		(pts
+			(xy 123.19 106.68) (xy 123.19 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bfe1988b-5e67-44d5-94e2-b3fbb341fedf")
 	)
 	(wire
 		(pts
@@ -2662,6 +2748,16 @@
 	)
 	(wire
 		(pts
+			(xy 123.19 110.49) (xy 153.67 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fa05922d-7cb6-452a-a801-b9ef13626c92")
+	)
+	(wire
+		(pts
 			(xy 142.24 138.43) (xy 142.24 143.51)
 		)
 		(stroke
@@ -2712,6 +2808,105 @@
 			(justify left)
 		)
 		(uuid "70cd8196-ea7d-47ff-907a-0c5d52d68815")
+	)
+	(hierarchical_label "I2C_SDA2"
+		(shape output)
+		(at 153.67 110.49 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8b85f564-733e-4e16-8fda-63332bc73dd1")
+	)
+	(hierarchical_label "I2C_SCL2"
+		(shape output)
+		(at 153.67 113.03 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8b85f564-733e-4e16-8fda-63332bc73dd1")
+	)
+	(hierarchical_label "I2C_INT2"
+		(shape output)
+		(at 153.67 115.57 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8b85f564-733e-4e16-8fda-63332bc73dd1")
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 143.51 99.06 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "074b7c7f-0d5c-44a2-bf3e-3a65c74051f4")
+		(property "Reference" "#PWR085"
+			(at 143.51 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 143.51 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 143.51 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 143.51 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 143.51 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e7a680e5-46b4-4206-b333-83d7bb061ebe")
+		)
+		(instances
+			(project "OrganKeyswitchBreakout"
+				(path "/cf1df97f-883a-4122-9971-552927dbf328/f3db0299-4998-412d-a88c-e94395a80076"
+					(reference "#PWR085")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "Device:R_US")
@@ -2778,6 +2973,76 @@
 			(project "OrganKeyswitchBreakout"
 				(path "/cf1df97f-883a-4122-9971-552927dbf328/f3db0299-4998-412d-a88c-e94395a80076"
 					(reference "R5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 143.51 102.87 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "0c0492a3-ecc4-4073-b6e8-1c1ef897f05a")
+		(property "Reference" "R42"
+			(at 146.05 101.5999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "4.7k"
+			(at 146.05 104.1399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 144.526 103.124 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 143.51 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 143.51 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6224cce2-10df-4cfc-8a2b-a24303c8cac8")
+		)
+		(pin "2"
+			(uuid "40827378-bff4-4685-ab20-8496ba71adfc")
+		)
+		(instances
+			(project "OrganKeyswitchBreakout"
+				(path "/cf1df97f-883a-4122-9971-552927dbf328/f3db0299-4998-412d-a88c-e94395a80076"
+					(reference "R42")
 					(unit 1)
 				)
 			)
@@ -3955,6 +4220,76 @@
 	)
 	(symbol
 		(lib_id "Device:R_US")
+		(at 123.19 102.87 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "96ba3143-4444-484f-9ec0-7d43edeef079")
+		(property "Reference" "R40"
+			(at 125.73 101.5999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "4.7k"
+			(at 125.73 104.1399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 124.206 103.124 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 123.19 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 123.19 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7b42d761-5b3f-46d4-9c1e-8f254796d9ad")
+		)
+		(pin "2"
+			(uuid "19d60005-df32-471b-8a7b-ca50227ced90")
+		)
+		(instances
+			(project "OrganKeyswitchBreakout"
+				(path "/cf1df97f-883a-4122-9971-552927dbf328/f3db0299-4998-412d-a88c-e94395a80076"
+					(reference "R40")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
 		(at 137.16 134.62 0)
 		(mirror y)
 		(unit 1)
@@ -4095,6 +4430,72 @@
 			(project "OrganKeyswitchBreakout"
 				(path "/cf1df97f-883a-4122-9971-552927dbf328/f3db0299-4998-412d-a88c-e94395a80076"
 					(reference "D3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 133.35 99.06 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "cf241ed5-d0ab-4d13-a614-fc922adf4ff1")
+		(property "Reference" "#PWR084"
+			(at 133.35 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 133.35 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 133.35 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 133.35 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 133.35 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "95fc71b4-f79a-4fe2-8568-b336861167f8")
+		)
+		(instances
+			(project "OrganKeyswitchBreakout"
+				(path "/cf1df97f-883a-4122-9971-552927dbf328/f3db0299-4998-412d-a88c-e94395a80076"
+					(reference "#PWR084")
 					(unit 1)
 				)
 			)
@@ -4370,6 +4771,142 @@
 			(project "OrganKeyswitchBreakout"
 				(path "/cf1df97f-883a-4122-9971-552927dbf328/f3db0299-4998-412d-a88c-e94395a80076"
 					(reference "#PWR0103")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 133.35 102.87 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "fe13677b-8a34-4a18-9c0b-c983afc50156")
+		(property "Reference" "R41"
+			(at 135.89 101.5999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "4.7k"
+			(at 135.89 104.1399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 134.366 103.124 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 133.35 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 133.35 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fbca4e13-9062-46fb-9272-31f5c4011b2a")
+		)
+		(pin "2"
+			(uuid "e483fb0e-fd62-4a7a-8bc5-c682603b09c5")
+		)
+		(instances
+			(project "OrganKeyswitchBreakout"
+				(path "/cf1df97f-883a-4122-9971-552927dbf328/f3db0299-4998-412d-a88c-e94395a80076"
+					(reference "R41")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 123.19 99.06 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "fffa2fd2-f9dc-4a89-81ab-90b3a61631a5")
+		(property "Reference" "#PWR083"
+			(at 123.19 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 123.19 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 123.19 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 123.19 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 123.19 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "dc91580f-9d40-4ca0-bf58-f58809e8d164")
+		)
+		(instances
+			(project "OrganKeyswitchBreakout"
+				(path "/cf1df97f-883a-4122-9971-552927dbf328/f3db0299-4998-412d-a88c-e94395a80076"
+					(reference "#PWR083")
 					(unit 1)
 				)
 			)
