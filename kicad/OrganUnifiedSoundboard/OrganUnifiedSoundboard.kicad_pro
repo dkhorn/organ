@@ -2,12 +2,228 @@
   "board": {
     "3dviewports": [],
     "design_settings": {
-      "defaults": {},
-      "diff_pair_dimensions": [],
+      "defaults": {
+        "apply_defaults_to_fp_fields": false,
+        "apply_defaults_to_fp_shapes": false,
+        "apply_defaults_to_fp_text": false,
+        "board_outline_line_width": 0.05,
+        "copper_line_width": 0.2,
+        "copper_text_italic": false,
+        "copper_text_size_h": 1.5,
+        "copper_text_size_v": 1.5,
+        "copper_text_thickness": 0.3,
+        "copper_text_upright": false,
+        "courtyard_line_width": 0.05,
+        "dimension_precision": 4,
+        "dimension_units": 3,
+        "dimensions": {
+          "arrow_length": 1270000,
+          "extension_offset": 500000,
+          "keep_text_aligned": true,
+          "suppress_zeroes": true,
+          "text_position": 0,
+          "units_format": 0
+        },
+        "fab_line_width": 0.1,
+        "fab_text_italic": false,
+        "fab_text_size_h": 1.0,
+        "fab_text_size_v": 1.0,
+        "fab_text_thickness": 0.15,
+        "fab_text_upright": false,
+        "other_line_width": 0.1,
+        "other_text_italic": false,
+        "other_text_size_h": 1.0,
+        "other_text_size_v": 1.0,
+        "other_text_thickness": 0.15,
+        "other_text_upright": false,
+        "pads": {
+          "drill": 0.8,
+          "height": 1.27,
+          "width": 2.54
+        },
+        "silk_line_width": 0.1,
+        "silk_text_italic": false,
+        "silk_text_size_h": 1.0,
+        "silk_text_size_v": 1.0,
+        "silk_text_thickness": 0.1,
+        "silk_text_upright": false,
+        "zones": {
+          "min_clearance": 0.5
+        }
+      },
+      "diff_pair_dimensions": [
+        {
+          "gap": 0.0,
+          "via_gap": 0.0,
+          "width": 0.0
+        }
+      ],
       "drc_exclusions": [],
-      "rules": {},
-      "track_widths": [],
-      "via_dimensions": []
+      "meta": {
+        "version": 2
+      },
+      "rule_severities": {
+        "annular_width": "error",
+        "clearance": "error",
+        "connection_width": "warning",
+        "copper_edge_clearance": "error",
+        "copper_sliver": "warning",
+        "courtyards_overlap": "error",
+        "creepage": "error",
+        "diff_pair_gap_out_of_range": "error",
+        "diff_pair_uncoupled_length_too_long": "error",
+        "drill_out_of_range": "error",
+        "duplicate_footprints": "warning",
+        "extra_footprint": "warning",
+        "footprint": "error",
+        "footprint_filters_mismatch": "ignore",
+        "footprint_symbol_mismatch": "warning",
+        "footprint_type_mismatch": "ignore",
+        "hole_clearance": "error",
+        "hole_to_hole": "warning",
+        "holes_co_located": "warning",
+        "invalid_outline": "error",
+        "isolated_copper": "warning",
+        "item_on_disabled_layer": "error",
+        "items_not_allowed": "error",
+        "length_out_of_range": "error",
+        "lib_footprint_issues": "warning",
+        "lib_footprint_mismatch": "warning",
+        "malformed_courtyard": "error",
+        "microvia_drill_out_of_range": "error",
+        "mirrored_text_on_front_layer": "warning",
+        "missing_courtyard": "ignore",
+        "missing_footprint": "warning",
+        "net_conflict": "warning",
+        "nonmirrored_text_on_back_layer": "warning",
+        "npth_inside_courtyard": "ignore",
+        "padstack": "warning",
+        "pth_inside_courtyard": "ignore",
+        "shorting_items": "error",
+        "silk_edge_clearance": "warning",
+        "silk_over_copper": "warning",
+        "silk_overlap": "warning",
+        "skew_out_of_range": "error",
+        "solder_mask_bridge": "error",
+        "starved_thermal": "error",
+        "text_height": "warning",
+        "text_on_edge_cuts": "error",
+        "text_thickness": "warning",
+        "through_hole_pad_without_hole": "error",
+        "too_many_vias": "error",
+        "track_angle": "error",
+        "track_dangling": "warning",
+        "track_segment_length": "error",
+        "track_width": "error",
+        "tracks_crossing": "error",
+        "unconnected_items": "error",
+        "unresolved_variable": "error",
+        "via_dangling": "warning",
+        "zones_intersect": "error"
+      },
+      "rules": {
+        "max_error": 0.005,
+        "min_clearance": 0.127,
+        "min_connection": 0.0,
+        "min_copper_edge_clearance": 0.5,
+        "min_groove_width": 0.0,
+        "min_hole_clearance": 0.25,
+        "min_hole_to_hole": 0.25,
+        "min_microvia_diameter": 0.2,
+        "min_microvia_drill": 0.1,
+        "min_resolved_spokes": 2,
+        "min_silk_clearance": 0.15,
+        "min_text_height": 1.0,
+        "min_text_thickness": 0.16,
+        "min_through_hole_diameter": 0.3,
+        "min_track_width": 0.127,
+        "min_via_annular_width": 0.18,
+        "min_via_diameter": 0.45,
+        "solder_mask_to_copper_clearance": 0.0,
+        "use_height_for_length_calcs": true
+      },
+      "teardrop_options": [
+        {
+          "td_onpthpad": true,
+          "td_onroundshapesonly": false,
+          "td_onsmdpad": true,
+          "td_ontrackend": false,
+          "td_onvia": true
+        }
+      ],
+      "teardrop_parameters": [
+        {
+          "td_allow_use_two_tracks": true,
+          "td_curve_segcount": 0,
+          "td_height_ratio": 1.0,
+          "td_length_ratio": 0.5,
+          "td_maxheight": 2.0,
+          "td_maxlen": 1.0,
+          "td_on_pad_in_zone": false,
+          "td_target_name": "td_round_shape",
+          "td_width_to_size_filter_ratio": 0.9
+        },
+        {
+          "td_allow_use_two_tracks": true,
+          "td_curve_segcount": 0,
+          "td_height_ratio": 1.0,
+          "td_length_ratio": 0.5,
+          "td_maxheight": 2.0,
+          "td_maxlen": 1.0,
+          "td_on_pad_in_zone": false,
+          "td_target_name": "td_rect_shape",
+          "td_width_to_size_filter_ratio": 0.9
+        },
+        {
+          "td_allow_use_two_tracks": true,
+          "td_curve_segcount": 0,
+          "td_height_ratio": 1.0,
+          "td_length_ratio": 0.5,
+          "td_maxheight": 2.0,
+          "td_maxlen": 1.0,
+          "td_on_pad_in_zone": false,
+          "td_target_name": "td_track_end",
+          "td_width_to_size_filter_ratio": 0.9
+        }
+      ],
+      "track_widths": [
+        0.0,
+        0.35,
+        1.0
+      ],
+      "tuning_pattern_settings": {
+        "diff_pair_defaults": {
+          "corner_radius_percentage": 80,
+          "corner_style": 1,
+          "max_amplitude": 1.0,
+          "min_amplitude": 0.2,
+          "single_sided": false,
+          "spacing": 1.0
+        },
+        "diff_pair_skew_defaults": {
+          "corner_radius_percentage": 80,
+          "corner_style": 1,
+          "max_amplitude": 1.0,
+          "min_amplitude": 0.2,
+          "single_sided": false,
+          "spacing": 0.6
+        },
+        "single_track_defaults": {
+          "corner_radius_percentage": 80,
+          "corner_style": 1,
+          "max_amplitude": 1.0,
+          "min_amplitude": 0.2,
+          "single_sided": false,
+          "spacing": 0.6
+        }
+      },
+      "via_dimensions": [
+        {
+          "diameter": 0.0,
+          "drill": 0.0
+        }
+      ],
+      "zones_allow_external_fillets": false
     },
     "ipc2581": {
       "dist": "",
@@ -272,6 +488,19 @@
         "via_diameter": 0.6,
         "via_drill": 0.3,
         "wire_width": 6
+      },
+      {
+        "diff_pair_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "coil_outputs",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 0,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.35,
+        "via_diameter": 0.6,
+        "via_drill": 0.3
       }
     ],
     "meta": {
@@ -279,7 +508,12 @@
     },
     "net_colors": null,
     "netclass_assignments": null,
-    "netclass_patterns": []
+    "netclass_patterns": [
+      {
+        "netclass": "Default",
+        "pattern": "/.*/coil_o.*"
+      }
+    ]
   },
   "pcbnew": {
     "last_paths": {
@@ -428,6 +662,370 @@
     [
       "82107bef-a801-4c3d-ac88-a6fb788da9b1",
       "BoardToBoardComms"
+    ],
+    [
+      "9577413b-f6b2-42dc-be4d-a1e4050087f0",
+      "mosfet_channel1"
+    ],
+    [
+      "940cad80-7c04-4585-9e43-fbe4083e52d7",
+      "outputs"
+    ],
+    [
+      "4c6039a4-6228-4cb9-9184-a4eca7c626a1",
+      "16_channel_output_block"
+    ],
+    [
+      "776b75a0-9f0c-4b99-818d-27674a6ed012",
+      "16_channel_mosfet_output"
+    ],
+    [
+      "303e3ae8-6954-49dc-984d-ccb4211e50da",
+      "mosfet_channel16"
+    ],
+    [
+      "39974adf-5d91-4376-b35b-0e374484cb17",
+      "mosfet_channel2"
+    ],
+    [
+      "f90da6de-b23d-4e48-b6ad-4ac525d69028",
+      "mosfet_channel3"
+    ],
+    [
+      "51b62f5d-59ea-4bfc-8a6a-fa9a5cb582e7",
+      "mosfet_channel4"
+    ],
+    [
+      "ddbfab5a-acdf-42dc-941b-5cf42b85ac04",
+      "mosfet_channel5"
+    ],
+    [
+      "5a20268c-9417-41b2-b1ba-69a07587124b",
+      "mosfet_channel6"
+    ],
+    [
+      "9968f819-a9a8-4090-9262-6b3e515811dd",
+      "mosfet_channel7"
+    ],
+    [
+      "3b5b9c05-75ac-4cc3-86bd-4cf30adcc835",
+      "mosfet_channel8"
+    ],
+    [
+      "51919737-9406-43a7-b09b-9128a1fae1be",
+      "mosfet_channel9"
+    ],
+    [
+      "9e401730-2cb5-4b84-8d45-2cd209252d1c",
+      "mosfet_channel10"
+    ],
+    [
+      "cc76795f-50c0-491c-85f0-212c43944a27",
+      "mosfet_channel11"
+    ],
+    [
+      "4a3322d3-b924-41ac-9225-9ae110039062",
+      "mosfet_channel12"
+    ],
+    [
+      "336bd503-3cf6-48aa-89f8-8ccf34e21eae",
+      "mosfet_channel13"
+    ],
+    [
+      "8d928203-afc9-4bb6-bef0-649cc94cb0d0",
+      "mosfet_channel14"
+    ],
+    [
+      "ce5f79d5-13b8-4ea5-ae10-16067f902117",
+      "mosfet_channel15"
+    ],
+    [
+      "c9453c30-c78e-4d19-b964-d234c5a57625",
+      "16_channel_output_block1"
+    ],
+    [
+      "776b75a0-9f0c-4b99-818d-27674a6ed012",
+      "16_channel_mosfet_output"
+    ],
+    [
+      "9577413b-f6b2-42dc-be4d-a1e4050087f0",
+      "mosfet_channel1"
+    ],
+    [
+      "39974adf-5d91-4376-b35b-0e374484cb17",
+      "mosfet_channel2"
+    ],
+    [
+      "51b62f5d-59ea-4bfc-8a6a-fa9a5cb582e7",
+      "mosfet_channel4"
+    ],
+    [
+      "f90da6de-b23d-4e48-b6ad-4ac525d69028",
+      "mosfet_channel3"
+    ],
+    [
+      "9e401730-2cb5-4b84-8d45-2cd209252d1c",
+      "mosfet_channel10"
+    ],
+    [
+      "51919737-9406-43a7-b09b-9128a1fae1be",
+      "mosfet_channel9"
+    ],
+    [
+      "cc76795f-50c0-491c-85f0-212c43944a27",
+      "mosfet_channel11"
+    ],
+    [
+      "4a3322d3-b924-41ac-9225-9ae110039062",
+      "mosfet_channel12"
+    ],
+    [
+      "303e3ae8-6954-49dc-984d-ccb4211e50da",
+      "mosfet_channel16"
+    ],
+    [
+      "8d928203-afc9-4bb6-bef0-649cc94cb0d0",
+      "mosfet_channel14"
+    ],
+    [
+      "336bd503-3cf6-48aa-89f8-8ccf34e21eae",
+      "mosfet_channel13"
+    ],
+    [
+      "ce5f79d5-13b8-4ea5-ae10-16067f902117",
+      "mosfet_channel15"
+    ],
+    [
+      "ddbfab5a-acdf-42dc-941b-5cf42b85ac04",
+      "mosfet_channel5"
+    ],
+    [
+      "5a20268c-9417-41b2-b1ba-69a07587124b",
+      "mosfet_channel6"
+    ],
+    [
+      "9968f819-a9a8-4090-9262-6b3e515811dd",
+      "mosfet_channel7"
+    ],
+    [
+      "3b5b9c05-75ac-4cc3-86bd-4cf30adcc835",
+      "mosfet_channel8"
+    ],
+    [
+      "0d76a18f-27f1-44a4-9313-414acb063caa",
+      "16_channel_output_block2"
+    ],
+    [
+      "776b75a0-9f0c-4b99-818d-27674a6ed012",
+      "16_channel_mosfet_output"
+    ],
+    [
+      "9577413b-f6b2-42dc-be4d-a1e4050087f0",
+      "mosfet_channel1"
+    ],
+    [
+      "39974adf-5d91-4376-b35b-0e374484cb17",
+      "mosfet_channel2"
+    ],
+    [
+      "51b62f5d-59ea-4bfc-8a6a-fa9a5cb582e7",
+      "mosfet_channel4"
+    ],
+    [
+      "f90da6de-b23d-4e48-b6ad-4ac525d69028",
+      "mosfet_channel3"
+    ],
+    [
+      "9e401730-2cb5-4b84-8d45-2cd209252d1c",
+      "mosfet_channel10"
+    ],
+    [
+      "51919737-9406-43a7-b09b-9128a1fae1be",
+      "mosfet_channel9"
+    ],
+    [
+      "cc76795f-50c0-491c-85f0-212c43944a27",
+      "mosfet_channel11"
+    ],
+    [
+      "4a3322d3-b924-41ac-9225-9ae110039062",
+      "mosfet_channel12"
+    ],
+    [
+      "303e3ae8-6954-49dc-984d-ccb4211e50da",
+      "mosfet_channel16"
+    ],
+    [
+      "8d928203-afc9-4bb6-bef0-649cc94cb0d0",
+      "mosfet_channel14"
+    ],
+    [
+      "336bd503-3cf6-48aa-89f8-8ccf34e21eae",
+      "mosfet_channel13"
+    ],
+    [
+      "ce5f79d5-13b8-4ea5-ae10-16067f902117",
+      "mosfet_channel15"
+    ],
+    [
+      "ddbfab5a-acdf-42dc-941b-5cf42b85ac04",
+      "mosfet_channel5"
+    ],
+    [
+      "5a20268c-9417-41b2-b1ba-69a07587124b",
+      "mosfet_channel6"
+    ],
+    [
+      "9968f819-a9a8-4090-9262-6b3e515811dd",
+      "mosfet_channel7"
+    ],
+    [
+      "3b5b9c05-75ac-4cc3-86bd-4cf30adcc835",
+      "mosfet_channel8"
+    ],
+    [
+      "53c872bd-8d74-47bb-ae30-2ff7bcb9311b",
+      "16_channel_output_block3"
+    ],
+    [
+      "776b75a0-9f0c-4b99-818d-27674a6ed012",
+      "16_channel_mosfet_output"
+    ],
+    [
+      "9577413b-f6b2-42dc-be4d-a1e4050087f0",
+      "mosfet_channel1"
+    ],
+    [
+      "39974adf-5d91-4376-b35b-0e374484cb17",
+      "mosfet_channel2"
+    ],
+    [
+      "51b62f5d-59ea-4bfc-8a6a-fa9a5cb582e7",
+      "mosfet_channel4"
+    ],
+    [
+      "f90da6de-b23d-4e48-b6ad-4ac525d69028",
+      "mosfet_channel3"
+    ],
+    [
+      "9e401730-2cb5-4b84-8d45-2cd209252d1c",
+      "mosfet_channel10"
+    ],
+    [
+      "51919737-9406-43a7-b09b-9128a1fae1be",
+      "mosfet_channel9"
+    ],
+    [
+      "cc76795f-50c0-491c-85f0-212c43944a27",
+      "mosfet_channel11"
+    ],
+    [
+      "4a3322d3-b924-41ac-9225-9ae110039062",
+      "mosfet_channel12"
+    ],
+    [
+      "303e3ae8-6954-49dc-984d-ccb4211e50da",
+      "mosfet_channel16"
+    ],
+    [
+      "8d928203-afc9-4bb6-bef0-649cc94cb0d0",
+      "mosfet_channel14"
+    ],
+    [
+      "336bd503-3cf6-48aa-89f8-8ccf34e21eae",
+      "mosfet_channel13"
+    ],
+    [
+      "ce5f79d5-13b8-4ea5-ae10-16067f902117",
+      "mosfet_channel15"
+    ],
+    [
+      "ddbfab5a-acdf-42dc-941b-5cf42b85ac04",
+      "mosfet_channel5"
+    ],
+    [
+      "5a20268c-9417-41b2-b1ba-69a07587124b",
+      "mosfet_channel6"
+    ],
+    [
+      "9968f819-a9a8-4090-9262-6b3e515811dd",
+      "mosfet_channel7"
+    ],
+    [
+      "3b5b9c05-75ac-4cc3-86bd-4cf30adcc835",
+      "mosfet_channel8"
+    ],
+    [
+      "23e30394-bdf6-4dc3-97a2-9c78a1100901",
+      "16_channel_output_block4"
+    ],
+    [
+      "776b75a0-9f0c-4b99-818d-27674a6ed012",
+      "16_channel_mosfet_output"
+    ],
+    [
+      "9577413b-f6b2-42dc-be4d-a1e4050087f0",
+      "mosfet_channel1"
+    ],
+    [
+      "39974adf-5d91-4376-b35b-0e374484cb17",
+      "mosfet_channel2"
+    ],
+    [
+      "51b62f5d-59ea-4bfc-8a6a-fa9a5cb582e7",
+      "mosfet_channel4"
+    ],
+    [
+      "f90da6de-b23d-4e48-b6ad-4ac525d69028",
+      "mosfet_channel3"
+    ],
+    [
+      "9e401730-2cb5-4b84-8d45-2cd209252d1c",
+      "mosfet_channel10"
+    ],
+    [
+      "51919737-9406-43a7-b09b-9128a1fae1be",
+      "mosfet_channel9"
+    ],
+    [
+      "cc76795f-50c0-491c-85f0-212c43944a27",
+      "mosfet_channel11"
+    ],
+    [
+      "4a3322d3-b924-41ac-9225-9ae110039062",
+      "mosfet_channel12"
+    ],
+    [
+      "303e3ae8-6954-49dc-984d-ccb4211e50da",
+      "mosfet_channel16"
+    ],
+    [
+      "8d928203-afc9-4bb6-bef0-649cc94cb0d0",
+      "mosfet_channel14"
+    ],
+    [
+      "336bd503-3cf6-48aa-89f8-8ccf34e21eae",
+      "mosfet_channel13"
+    ],
+    [
+      "ce5f79d5-13b8-4ea5-ae10-16067f902117",
+      "mosfet_channel15"
+    ],
+    [
+      "ddbfab5a-acdf-42dc-941b-5cf42b85ac04",
+      "mosfet_channel5"
+    ],
+    [
+      "5a20268c-9417-41b2-b1ba-69a07587124b",
+      "mosfet_channel6"
+    ],
+    [
+      "9968f819-a9a8-4090-9262-6b3e515811dd",
+      "mosfet_channel7"
+    ],
+    [
+      "3b5b9c05-75ac-4cc3-86bd-4cf30adcc835",
+      "mosfet_channel8"
     ]
   ],
   "text_variables": {}

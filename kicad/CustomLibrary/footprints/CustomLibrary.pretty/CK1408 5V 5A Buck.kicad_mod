@@ -1,0 +1,184 @@
+(footprint "CK1408 5V 5A Buck"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(placed yes)
+	(layer "F.Cu")
+	(tags "Power 5V 3A")
+	(property "Reference" "A5V1"
+		(at -0.000002 7.315198 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "3eccc2d2-ee82-49dd-a3de-f0fd72d7f9a1")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "~"
+		(at -0.3556 5.1816 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "ead72d63-f973-47bc-82ee-6d415c821aff")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "489af23a-cb80-48d6-ae79-3f44f45b2700")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "3650bb7c-3463-4c57-9f18-5723cc85ef72")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_rect
+		(start -0.1 -0.7)
+		(end 24.7 20.2)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "70537c2b-3c0c-4bf0-a671-f1b2e1e070f8")
+	)
+	(fp_rect
+		(start 0 0)
+		(end 24.5 20)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "7e60c4ed-9750-4c3a-8c7f-64570be1ae21")
+	)
+	(fp_text user "GND"
+		(at 8.4 3.6 180)
+		(layer "F.SilkS")
+		(uuid "2a3c9c49-4c0d-4911-b46d-32bfbeadb330")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "VOUT"
+		(at 14.8 3.7 180)
+		(layer "F.SilkS")
+		(uuid "a02b009f-c789-49ae-b48b-0ae2caa74faf")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "VIN"
+		(at 2.2 3.6 180)
+		(layer "F.SilkS")
+		(uuid "e9004116-6b3c-435b-809a-b5e966ebd94a")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "" np_thru_hole rect
+		(at 7.6 10)
+		(size 5.7 8.3)
+		(drill 0.1)
+		(layers "F&B.Cu" "*.Mask")
+		(zone_connect 0)
+		(uuid "e35887b9-47f8-4dc0-bc6a-cd1fdd1a407c")
+	)
+	(pad "" np_thru_hole rect
+		(at 23 20 180)
+		(size 2 1.5)
+		(drill 1
+			(offset 0 0.75)
+		)
+		(layers "F&B.Cu" "*.Mask")
+		(zone_connect 0)
+		(uuid "4fa0cef5-df48-4e9e-b54e-bf1be2d93ba1")
+	)
+	(pad "1" thru_hole rect
+		(at 2.2 0)
+		(size 2.4 2.4)
+		(drill 1
+			(offset 0 1.2)
+		)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "5b371fd3-21b3-4193-b91b-267238842dfd")
+	)
+	(pad "2" thru_hole rect
+		(at 7.1 0)
+		(size 2.4 2.4)
+		(drill 1
+			(offset 0 1.2)
+		)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "cebc7ada-2812-4274-bc37-b3eddfaf574a")
+	)
+	(pad "3" thru_hole rect
+		(at 14.8 0)
+		(size 2.4 2.4)
+		(drill 1
+			(offset 0 1.2)
+		)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "53c491e4-0703-4ebd-9a9f-b76ab931e744")
+	)
+	(pad "4" thru_hole rect
+		(at 9.5 0)
+		(size 2.4 2.4)
+		(drill 1
+			(offset 0 1.2)
+		)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "c9e7a38f-bcac-4efc-854a-56daba003583")
+	)
+	(embedded_fonts no)
+	(model "${KISYS3DMOD}/Module.3dshapes/Arduino_UNO_R2.wrl"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

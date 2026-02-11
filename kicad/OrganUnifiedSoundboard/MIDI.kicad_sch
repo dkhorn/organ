@@ -2830,7 +2830,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "CONN5_SDS-50J_CUD"
+		(property "Footprint" "CustomLibrary:Custom_CONN5_SDS-50J_CUD"
 			(at 219.71 99.06 0)
 			(effects
 				(font
@@ -4111,7 +4111,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "CONN5_SDS-50J_CUD"
+		(property "Footprint" "CustomLibrary:Custom_CONN5_SDS-50J_CUD"
 			(at 104.14 33.02 0)
 			(effects
 				(font
