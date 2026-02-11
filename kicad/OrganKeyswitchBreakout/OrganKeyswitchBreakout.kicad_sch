@@ -1042,6 +1042,26 @@
 	)
 	(wire
 		(pts
+			(xy 64.77 90.17) (xy 68.58 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1dda30b7-3284-4a92-975d-36a1f7f0e116")
+	)
+	(wire
+		(pts
+			(xy 50.8 85.09) (xy 64.77 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "291a5978-f125-420c-b83b-075bb73247c8")
+	)
+	(wire
+		(pts
 			(xy 29.21 20.32) (xy 29.21 17.78)
 		)
 		(stroke
@@ -1192,6 +1212,16 @@
 	)
 	(wire
 		(pts
+			(xy 50.8 92.71) (xy 68.58 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5ebfd386-e03e-4f36-9520-93fa98bba3e5")
+	)
+	(wire
+		(pts
 			(xy 69.85 31.75) (xy 68.58 31.75)
 		)
 		(stroke
@@ -1282,6 +1312,16 @@
 	)
 	(wire
 		(pts
+			(xy 68.58 87.63) (xy 59.69 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "709c15f4-afee-4eb9-a7b6-da43e28aeb2f")
+	)
+	(wire
+		(pts
 			(xy 226.06 29.21) (xy 222.25 29.21)
 		)
 		(stroke
@@ -1322,6 +1362,16 @@
 	)
 	(wire
 		(pts
+			(xy 50.8 88.9) (xy 63.5 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8ae565a3-2fc5-4255-8fbc-b2a436b9eba6")
+	)
+	(wire
+		(pts
 			(xy 271.78 99.06) (xy 267.97 99.06)
 		)
 		(stroke
@@ -1339,6 +1389,16 @@
 			(type default)
 		)
 		(uuid "94c453d6-c2cf-4d2a-b854-8dc77c5065e9")
+	)
+	(wire
+		(pts
+			(xy 63.5 88.9) (xy 63.5 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "95129f35-af90-4077-89a7-544e4dfe5b00")
 	)
 	(wire
 		(pts
@@ -1482,6 +1542,16 @@
 	)
 	(wire
 		(pts
+			(xy 63.5 95.25) (xy 68.58 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d7cdf83f-f230-4b78-b440-92f327a9310b")
+	)
+	(wire
+		(pts
 			(xy 137.16 52.07) (xy 133.35 52.07)
 		)
 		(stroke
@@ -1489,6 +1559,16 @@
 			(type default)
 		)
 		(uuid "e2dca0cf-990f-4938-ae90-656aaeab2f8d")
+	)
+	(wire
+		(pts
+			(xy 64.77 85.09) (xy 64.77 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e378f838-b326-4fce-89e2-88da58704512")
 	)
 	(wire
 		(pts
@@ -1529,6 +1609,16 @@
 			(type default)
 		)
 		(uuid "ebbf605c-037c-4b78-a62f-acabdd8d6e6d")
+	)
+	(wire
+		(pts
+			(xy 59.69 87.63) (xy 59.69 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f8c1661d-9d7b-43b6-b1e7-6f477c2b7861")
 	)
 	(wire
 		(pts
@@ -2293,7 +2383,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "I2C Child"
+		(property "Value" "I2C Bus1"
 			(at 11.43 26.6699 0)
 			(effects
 				(font
@@ -2614,6 +2704,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 59.69 109.22 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "58c19f77-7075-40bc-b263-f364f837884f")
+		(property "Reference" "#PWR087"
+			(at 59.69 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 59.69 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 59.69 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 59.69 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 59.69 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "91676d68-a4e1-4c22-8629-b0c370148d2d")
+		)
+		(instances
+			(project "OrganKeyswitchBreakout"
+				(path "/cf1df97f-883a-4122-9971-552927dbf328"
+					(reference "#PWR087")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Mechanical:MountingHole")
 		(at 19.05 119.38 0)
 		(unit 1)
@@ -2868,6 +3024,150 @@
 			(project "OrganKeyswitchBreakout"
 				(path "/cf1df97f-883a-4122-9971-552927dbf328"
 					(reference "#PWR021")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
+		(at 68.58 85.09 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "861414fd-1abe-422f-b95c-92b683f3997f")
+		(property "Reference" "#PWR086"
+			(at 68.58 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 68.58 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 68.58 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 68.58 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
+			(at 68.58 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "065839e7-bd53-4ad1-9b07-7b014f8fc4ef")
+		)
+		(instances
+			(project "OrganKeyswitchBreakout"
+				(path "/cf1df97f-883a-4122-9971-552927dbf328"
+					(reference "#PWR086")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x05")
+		(at 73.66 90.17 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9485c87a-69d6-4e14-9fe4-02249d839dc4")
+		(property "Reference" "J16"
+			(at 76.2 88.8999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "I2C Bus2"
+			(at 76.2 91.4399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_PH_B5B-PH-K_1x05_P2.00mm_Vertical"
+			(at 73.66 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 73.66 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 73.66 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "b74adf56-ddfd-4d9e-834a-8972c4379108")
+		)
+		(pin "2"
+			(uuid "8a590175-cc43-4aa7-a38f-a8060204cc33")
+		)
+		(pin "4"
+			(uuid "097381d2-59d7-46aa-b117-220a569ac5ba")
+		)
+		(pin "5"
+			(uuid "f2ad51bc-0569-4fac-aabc-d65bdcee9bbf")
+		)
+		(pin "1"
+			(uuid "0cac9267-35d3-434d-af86-45b9c3196c43")
+		)
+		(instances
+			(project "OrganKeyswitchBreakout"
+				(path "/cf1df97f-883a-4122-9971-552927dbf328"
+					(reference "J16")
 					(unit 1)
 				)
 			)
@@ -3984,6 +4284,36 @@
 		(pin "I2C_SDA" input
 			(at 50.8 78.74 0)
 			(uuid "a5401af8-3af6-469f-9fcd-6f28fcb74e2b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "I2C_INT2" output
+			(at 50.8 85.09 0)
+			(uuid "a3b9e123-5a02-4940-becf-c3b040c70db8")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "I2C_SCL2" output
+			(at 50.8 88.9 0)
+			(uuid "9281661e-f4eb-434a-8f46-2eb2ce68cc96")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "I2C_SDA2" output
+			(at 50.8 92.71 0)
+			(uuid "65aca619-82db-492f-9f15-3e9945669fdd")
 			(effects
 				(font
 					(size 1.27 1.27)

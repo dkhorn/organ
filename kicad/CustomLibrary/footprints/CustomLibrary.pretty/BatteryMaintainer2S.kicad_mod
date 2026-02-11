@@ -1,0 +1,188 @@
+(footprint "BatteryMaintainer2S"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "G***"
+		(at 0 0 0)
+		(layer "F.SilkS")
+		(uuid "e4dcb68e-9ec6-46a5-9c6e-dc1d05564cfa")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+			)
+		)
+	)
+	(property "Value" "LOGO"
+		(at 0.75 0 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "40e48937-d509-46e5-baf6-d9ed82d2190f")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.3)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "03a3e7fb-43dc-4bbd-98d5-fa73477ad6c6")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e5590895-a28d-4753-8f10-dff8a65580c9")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr board_only exclude_from_pos_files exclude_from_bom)
+	(fp_poly
+		(pts
+			(xy 23.395623 -8.556499) (xy 23.37878 -8.539655) (xy 23.361936 -8.556499) (xy 23.37878 -8.573342)
+		)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill yes)
+		(layer "Dwgs.User")
+		(uuid "014fe9a2-6fd4-49c9-ba8a-38b43ad4a7f0")
+	)
+	(fp_rect
+		(start -23.8 -9.7)
+		(end 24.1 10)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "c37a9642-f881-4230-811d-5721297525e3")
+	)
+	(fp_text user "4.2V Battery Mid"
+		(at -20.7 0.7 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "0a6023bf-6952-426c-84b6-4eca79915088")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(fp_text user "LoadNeg"
+		(at -14.6 -2.4 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "1249b1eb-5f90-4836-938d-1f876e03ca68")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(fp_text user "0V Battery Neg"
+		(at 8.2 -7.1 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "41772e85-5e5c-4029-884e-d7002ad46bc0")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(fp_text user "8.4V Battery Pos"
+		(at 6.9 8 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "65a8ab01-8712-43da-bf43-448f31f448f4")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(fp_text user "LoadPos"
+		(at -14.8 3.5 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "9aff6899-8ca4-42f2-b25c-b314fcec1f63")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at 21.5 7.5)
+		(size 2.5 2.5)
+		(drill 0.8)
+		(property pad_prop_heatsink)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "72e4b88e-8298-472c-8169-9985197eecd3")
+	)
+	(pad "2" thru_hole circle
+		(at -22.5 0.169266)
+		(size 2.5 2.5)
+		(drill 0.8)
+		(property pad_prop_heatsink)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "71a0e216-a090-4c40-9b90-443f42232b19")
+	)
+	(pad "3" thru_hole circle
+		(at 21.5 -7.5)
+		(size 2.5 2.5)
+		(drill 0.8)
+		(property pad_prop_heatsink)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "debe8e11-9cd8-462c-a414-ae401ad18ad5")
+	)
+	(pad "4" thru_hole circle
+		(at -16.5 2.8)
+		(size 2.5 2.5)
+		(drill 0.8)
+		(property pad_prop_heatsink)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "3bcf3eba-a20b-4b4c-9f70-2b81719ba9e0")
+	)
+	(pad "5" thru_hole circle
+		(at -16.5 -2.8)
+		(size 2.5 2.5)
+		(drill 0.8)
+		(property pad_prop_heatsink)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "e3c90cad-1610-471b-b8f6-b1fcd185d5d9")
+	)
+	(embedded_fonts no)
+)
