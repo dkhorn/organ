@@ -3,3 +3,7 @@
 *.lck
 *fp-info-cache
 *.zip
+*.FCBak
+*.chitubox
+*.ctb
+*/.pio/*
