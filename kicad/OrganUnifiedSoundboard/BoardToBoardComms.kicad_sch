@@ -2196,7 +2196,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "CAN Terminator"
+		(property "Value" "CAN Term?"
 			(at 147.32 73.6599 90)
 			(effects
 				(font

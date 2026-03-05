@@ -720,16 +720,6 @@
 	)
 	(wire
 		(pts
-			(xy 127 22.86) (xy 127 31.75)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4da0e5dd-c749-4f55-9342-c01f11a0fcb3")
-	)
-	(wire
-		(pts
 			(xy 151.13 73.66) (xy 137.16 73.66)
 		)
 		(stroke
@@ -1437,17 +1427,6 @@
 			(justify right)
 		)
 		(uuid "308864a5-8017-4fcb-b0ca-3d874faaecbb")
-	)
-	(hierarchical_label "12V"
-		(shape bidirectional)
-		(at 127 22.86 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "338180f1-d942-4f33-b72d-cbd51f4cdceb")
 	)
 	(hierarchical_label "SRCLR"
 		(shape input)
@@ -2157,16 +2136,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
-			)
-		)
-		(pin "12V" bidirectional
-			(at 127 31.75 90)
-			(uuid "928865b6-f58e-4d9d-89bd-6ec043f09ce5")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 			)
 		)
 		(pin "coil_gnd" bidirectional
