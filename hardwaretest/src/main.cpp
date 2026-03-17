@@ -13,6 +13,7 @@
 #include "midireceiver.h"
 #include "midiudp.h"
 #include "httpserver.h"
+#include "can_bus.h"
 
 // ---- WiFi creds ----
 static const char* WIFI_SSID = "HAWI";
@@ -215,6 +216,7 @@ void setup() {
   midiReceiver.begin();
   midiUDP.begin();  // Start MIDI/UDP receiver on port 21928
   timekeeping.begin();
+  can_bus_begin();  // Start CAN bus (TWAI) for note event broadcast
 
   clearAll();
   flushOutput();

@@ -1,6 +1,5 @@
 #include "midihandler.h"
 #include "midinote.h"
-#include "can_bus.h"
 
 // Proof-of-concept: broadcast all note events on CAN channel 0 ("Great").
 #define CAN_BROADCAST_CHANNEL 0
@@ -16,17 +15,14 @@ void handle_midi_message(uint8_t status, uint8_t data1, uint8_t data2) {
     switch (type) {
         case 0x80:  // Note Off
             note_off(data1, data2);
-            can_send_note_off(CAN_BROADCAST_CHANNEL, data1, data2);
             break;
             
         case 0x90:  // Note On
             if (data2 == 0) {
                 // Velocity 0 = Note Off
                 note_off(data1, 0);
-                can_send_note_off(CAN_BROADCAST_CHANNEL, data1, 0);
             } else {
                 note_on(data1, data2);
-                can_send_note_on(CAN_BROADCAST_CHANNEL, data1, data2);
             }
             break;
             
