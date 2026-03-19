@@ -9,4 +9,8 @@ const int PIN_CLR_N  = 8;
 
 const int PIN_BUTTON = 4;   // button to GND, use INPUT_PULLUP
 
+// CAN bus (TWAI)
+const int PIN_CAN_RX = 1;   // GPIO1, physical pin 41
+const int PIN_CAN_TX = 2;   // GPIO2, physical pin 40
+
 #endif
