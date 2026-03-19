@@ -63,7 +63,7 @@ void MidiReceiver::update() {
         lastByteTime = millis();
         bytesReceived++;
         lastByte = byte;
-        Log.printf("MIDI RAW: 0x%02X\n", byte); // DEBUG: log every byte
+        // Log.printf("MIDI RAW: 0x%02X\n", byte); // DEBUG: log every byte
         
         // Check for status byte (bit 7 set)
         if (byte & 0x80) {

@@ -1,7 +1,10 @@
 #ifndef OUTPUT_H
 #define OUTPUT_H
 
-#define NUM_CHANNELS    48
+// Static buffer size — never needs to change even if num_outputs is reconfigured at runtime.
+// The active output count is stored in config (see config.h / config_num_outputs()).
+#define MAX_OUTPUT_CHANNELS 128
+#define MAX_OUTPUT_BYTES    ((MAX_OUTPUT_CHANNELS + 7) / 8)  // 16 bytes
 
 
 #include <stdint.h>

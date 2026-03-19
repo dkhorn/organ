@@ -9,6 +9,7 @@
 #include "midinote.h"
 #include "midireceiver.h"
 #include "midiudp.h"
+#include "config.h"
 
 // ---- WiFi creds ----
 static const char* WIFI_SSID = "HAWI";
@@ -108,6 +109,8 @@ void setup() {
     Log.println("IP: Not connected");
   }
 
+
+  config_begin();  // load NVS settings before output/midi modules init
 
   pinMode(PIN_MOSI,   OUTPUT);
   pinMode(PIN_SCK,    OUTPUT);

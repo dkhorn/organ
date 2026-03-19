@@ -8,6 +8,9 @@
 #include "midiudp.h"
 #include "midireceiver.h"
 #include "midihandler.h"
+#include "config.h"
+#include "config_page.h"
+#include "play_page.h"
 #include "api_docs.h"
 #include "settings_page.h"
 #include "pins.h"
@@ -264,6 +267,10 @@ static void handleLogsPoll() {
 
 // Handler for GET /keyboard
 // Handler for GET /
+static void handlePlayPage() {
+  server.send_P(200, "text/html", PLAY_PAGE_HTML);
+}
+
 static void handleRoot() {
   server.send(200, "text/html", get_keyboard_html());
 }
@@ -482,11 +489,93 @@ static void handleMidiWiggle() {
   server.send(200, "application/json", json);
 }
 
+// ---- Config page & API ------------------------------------------------
+
+static void handleConfigPage() {
+  server.send(200, "text/html", CONFIG_PAGE_HTML);
+}
+
+// GET /config/get  — returns full config as JSON (streamed to avoid large heap allocation)
+static void handleConfigGet() {
+  Config& cfg = config_get();
+  server.setContentLength(CONTENT_LENGTH_UNKNOWN);
+  server.send(200, "application/json", "");
+
+  char buf[8];
+  server.sendContent("{\"num_outputs\":");
+  snprintf(buf, sizeof(buf), "%u", cfg.num_outputs);
+  server.sendContent(buf);
+  server.sendContent(",\"channels\":[");
+
+  for (int ch = 0; ch < MIDI_CHANNELS; ch++) {
+    if (ch > 0) server.sendContent(",");
+    server.sendContent("{\"enabled\":");
+    server.sendContent(cfg.midi[ch].enabled ? "true" : "false");
+    server.sendContent(",\"map\":[");
+    // Build this channel's map as one stack buffer to minimise sendContent calls
+    char mapBuf[640];  // worst-case: 128 values of "-1," = 128*3+1 = 385 bytes; 640 is safe
+    int pos = 0;
+    for (int n = 0; n < 128; n++) {
+      if (n > 0) mapBuf[pos++] = ',';
+      pos += snprintf(mapBuf + pos, sizeof(mapBuf) - pos, "%d",
+                      (int)cfg.midi[ch].note_to_output[n]);
+    }
+    server.sendContent(mapBuf, pos);
+    server.sendContent("]}");
+  }
+  server.sendContent("]}");
+}
+
+// POST /config/num_outputs  body: value=56
+static void handleConfigNumOutputs() {
+  if (!server.hasArg("value")) {
+    server.send(400, "text/plain", "Missing value");
+    return;
+  }
+  int val = server.arg("value").toInt();
+  if (val < 1 || val > MAX_OUTPUT_CHANNELS) {
+    server.send(400, "text/plain", "value must be 1-128");
+    return;
+  }
+  config_get().num_outputs = (uint8_t)val;
+  config_save_num_outputs();
+  server.send(200, "text/plain", "Saved: num_outputs=" + String(val));
+}
+
+// POST /config/channel  body: ch=0&enabled=1&map=0,1,2,-1,...
+static void handleConfigChannel() {
+  if (!server.hasArg("ch") || !server.hasArg("map")) {
+    server.send(400, "text/plain", "Missing ch or map");
+    return;
+  }
+  int ch = server.arg("ch").toInt();
+  if (ch < 0 || ch >= MIDI_CHANNELS) {
+    server.send(400, "text/plain", "ch must be 0-15");
+    return;
+  }
+  Config& cfg = config_get();
+  cfg.midi[ch].enabled = server.hasArg("enabled") && server.arg("enabled") == "1";
+
+  // Parse comma-separated map (128 values)
+  String mapStr = server.arg("map");
+  int note = 0, start = 0;
+  for (int i = 0; i <= (int)mapStr.length() && note < 128; i++) {
+    if (i == (int)mapStr.length() || mapStr[i] == ',') {
+      cfg.midi[ch].note_to_output[note++] = (int8_t)mapStr.substring(start, i).toInt();
+      start = i + 1;
+    }
+  }
+
+  config_save_channel((uint8_t)ch);
+  server.send(200, "text/plain", "Saved channel " + String(ch));
+}
+
 extern "C" {
 
 void httpserver_begin() {
   // Register route handlers
   server.on("/", HTTP_GET, handleRoot);
+  server.on("/play", HTTP_GET, handlePlayPage);
   server.on("/api", HTTP_GET, handleAPIDocumentation);
   server.on("/settings", HTTP_GET, handleSettings);
   server.on("/status", HTTP_GET, handleStatus);
@@ -498,8 +587,12 @@ void httpserver_begin() {
   server.on("/note_on", HTTP_GET, handleNoteOn);
   server.on("/note_off", HTTP_GET, handleNoteOff);
   server.on("/all_off", HTTP_GET, handleAllOff);
-  server.on("/midi/diag", HTTP_GET, handleMidiDiag);
-  server.on("/midi/wiggle", HTTP_GET, handleMidiWiggle);
+  server.on("/midi/diag",            HTTP_GET,  handleMidiDiag);
+  server.on("/midi/wiggle",           HTTP_GET,  handleMidiWiggle);
+  server.on("/config",                HTTP_GET,  handleConfigPage);
+  server.on("/config/get",            HTTP_GET,  handleConfigGet);
+  server.on("/config/num_outputs",    HTTP_POST, handleConfigNumOutputs);
+  server.on("/config/channel",        HTTP_POST, handleConfigChannel);
   
   // For parameterized routes, we'll handle them in onNotFound
   // and check the path prefix there

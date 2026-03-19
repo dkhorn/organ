@@ -1,7 +1,7 @@
 import socket
 import mido
 
-DEST_IP = "192.168.127.196"
+DEST_IP = "192.168.1.182"
 DEST_PORT = 21928
 MUDP_MAGIC = b"MU"
 MUDP_VER = 1
