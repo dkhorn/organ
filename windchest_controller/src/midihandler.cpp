@@ -1,5 +1,6 @@
 #include "midihandler.h"
 #include "midinote.h"
+#include "logger.h"
 
 extern "C" {
 
@@ -20,7 +21,10 @@ void handle_midi_message(uint8_t status, uint8_t data1, uint8_t data2) {
             break;
 
         case 0xB0:  // Control Change
-            if (data1 == 123) all_off();  // CC 123 = All Notes Off
+            if (data1 == 123) {
+                all_off();  // CC 123 = All Notes Off
+                Log.printf("ALL OFF\n"); // DEBUG: log every byte
+            }
             break;
 
         default:
